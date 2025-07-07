@@ -1,13 +1,16 @@
 # Ignorar todo por defecto
 /*
 
-# Incluir la carpeta "Proyecto-Unity" y su contenido
+# Incluir carpetas clave
 !Proyecto-Unity/
-!Proyecto-Unity/**
+!Proyecto-Unity/Assets/
+!Proyecto-Unity/ProjectSettings/
+!Proyecto-Unity/Packages/
+!Proyecto-Unity/Assets/**
+!Proyecto-Unity/ProjectSettings/**
+!Proyecto-Unity/Packages/**
 !Docs/
 !Docs/**
-
-# Dentro de "Proyecto-Unity", ignorar carpetas y archivos innecesarios
 
 # Unity cache & build folders
 Proyecto-Unity/Library/
@@ -72,3 +75,7 @@ Proyecto-Unity/Assets/Unity.VisualScripting.Generated/VisualScripting.Core/Prope
 
 # Archivos de prueba generados
 Proyecto-Unity/Assets/InitTestScene*.unity*
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
