@@ -8,20 +8,25 @@ Este documento describe la estructura y organización del proyecto para facilita
 
 1. [Arquitectura](#arquitectura)
 2. [Tecnologías utilizadas](#tecnologías-utilizadas)
-   - [Lenguajes](#lenguajes)
+   - [Motor Grafico](#motor-grafico)
+   - [Lenguajes/](#lenguajes)
 3. [Carpetas](#carpetas)
+   - [Docs/](#docs)
+   - [Proyecto-Unity/](#proyecto-unity)
 
 ---
 
-## 🧱 Arquitectura
+## Arquitectura
 
 (Consulta el archivo [`Arquitectura.md`](./Arquitectura.md) para una descripción detallada del diseño del proyecto.)
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## Tecnologías utilizadas
 
-### 🔤 Lenguajes
+### Motor Grafico/
+
+### Lenguajes/
 
 Usamos exclusivamente **C#** para toda la lógica del juego en Unity.
 
@@ -31,15 +36,13 @@ Usamos exclusivamente **C#** para toda la lógica del juego en Unity.
 
 ---
 
-## 📂 Carpetas
+## Carpetas
 
-### 📄 Docs/
+### Docs/
 
 Contiene documentación adicional como la arquitectura del sistema, estructura del proyecto, guías internas y notas de desarrollo.
 
----
-
-### 🎮 Proyecto-Unity/
+### Proyecto-Unity/
 
 Contiene todas las carpetas necesarias para abrir y ejecutar el proyecto correctamente desde Unity Hub.
 
