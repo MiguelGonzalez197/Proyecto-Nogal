@@ -18,4 +18,4 @@
 
 > Es importante para nosotros que cada persona que entre a este repositorio entienda completamente cómo funciona nuestro proyecto.
 > 
-Consulta la [estructura del proyecto](ruta/al/archivo.md) para conocer cómo está organizado el código, los assets, y la arquitectura general del juego.
+Consulta la [estructura del proyecto](Docs/Estructura-del-proyecto.md) para conocer cómo está organizado el código, los assets, y la arquitectura general del juego.
