@@ -1,70 +1,67 @@
-# 📁 Estructura del Proyecto
+# 🧱 Arquitectura del Proyecto
 
-Este documento describe la estructura y organización del proyecto para facilitar su comprensión, mantenimiento y escalabilidad.
-
----
-
-## 📑 Índice
-
-1. [Arquitectura](#arquitectura)
-2. [Tecnologías utilizadas](#tecnologías-utilizadas)
-   - [Motor Grafico](#motor-grafico)
-   - [Lenguajes/](#lenguajes)
-3. [Carpetas](#carpetas)
-   - [Docs/](#docs)
-   - [Proyecto-Unity/](#proyecto-unity)
+Este documento describe la arquitectura general del proyecto, incluyendo el diseño de clases, interacciones entre componentes, y el flujo de ejecución de los sistemas principales del juego.
 
 ---
 
-## Arquitectura
+## 📌 Objetivo
 
-(Consulta el archivo [`Arquitectura.md`](./Arquitectura.md) para una descripción detallada del diseño del proyecto.)
-
----
-
-## Tecnologías utilizadas
-
-### Motor Grafico/
-
-### Lenguajes/
-
-Usamos exclusivamente **C#** para toda la lógica del juego en Unity.
-
-| Extensión | Lenguaje | Uso                          |
-|-----------|----------|-------------------------------|
-| `.cs`     | C#       | Toda la lógica del juego      |
+Diseñar un sistema modular, escalable y desacoplado para facilitar la implementación y el mantenimiento de mecánicas como la interacción, la lógica de puzzles, y la administración del juego.
 
 ---
 
-## Carpetas
+## 🧩 Patrones utilizados
 
-### Docs/
+- **Singleton**: Para GameManager, InputManager, etc.
+- **Composición**: Separación de comportamientos en componentes.
+- **Interfaces**: Para desacoplar acciones (`IModulo`, `IItem`, etc.).
+- **Event-driven**: Uso de eventos para comunicar estados entre sistemas{}____.
 
-Contiene documentación adicional como la arquitectura del sistema, estructura del proyecto, guías internas y notas de desarrollo.
+---
 
-### Proyecto-Unity/
+## 🧬 Diagrama de clases
 
-Contiene todas las carpetas necesarias para abrir y ejecutar el proyecto correctamente desde Unity Hub.
+> Representa la relación entre los objetos principales del juego y cómo se comunican entre sí.
 
-```text
-Assets/                  # Código fuente, escenas, prefabs, materiales, modelos, sonidos, animaciones, etc.
-├── Editor/              # Scripts personalizados para herramientas del editor
-├── Settings/            # Configuraciones personalizadas (puede incluir sistemas de entrada o settings de paquetes)
-├── Audio/               # Efectos de sonido y música
-├── Materials/           # Materiales organizados
-├── Prefabs/             # Objetos preconfigurados del juego
-├── Scenes/              # Escenas del juego
-├── Scripts/             # Código fuente organizado por funcionalidad
-│   ├── Player/          # Lógica del jugador
-│   ├── Enums/           # Enumeraciones globales del juego
-│   ├── UI/              # Scripts para la interfaz de usuario
-│   ├── Systems/         # Controladores generales (GameManager, InputManager, etc.)
-│   └── Interfaces/      # Interfaces para desacoplar sistemas (IPuzzle, IInteractable, etc.)
-├── Animations/          # Controladores Animator y animaciones
-├── UI/                  # Canvases, botones, íconos, fuentes
-├── FX/                  # Partículas, efectos visuales y shaders
-└── Resources/           # Assets cargados dinámicamente por scripts (usa con moderación)
+![Diagrama de Clases](./imgs/diagrama_clases.png)
 
-Packages/                # Registra los paque
-ProjectSettings/         # Configuraciones del proyecto: Input, Tags, Layers, Build Settings, Quality, etc.
-UserSettings/            # Configuración específica del usuario 
+**Principales entidades:**
+
+- `GameManager`: Controla el dinero del jugador y se comunica con objetos (Los modulos) que implementan `IIModulo`.
+- `Modulo`: Controla si el modulo se encuentra activo, el tipo de modulo y despliega su funcionalidad.
+- `Modulo`: Elemento del puzzle que puede animarse, moverse o validar su estado.
+
+> 📌 El uso de interfaces permite que los objetos interactivos puedan reaccionar de forma personalizada sin depender del tipo concreto del objeto.
+
+---
+
+## 🔄 Diagrama de secuencia
+
+> Muestra el flujo de interacción cuando el jugador interactúa con los modulos.
+
+![Diagrama de Secuencia](./imgs/diagrama_secuencia.png)
+
+**Escenario:** El jugador presiona...
+
+**Flujo:**
+
+1. 
+2. 
+3. 
+4.  
+5. 
+
+---
+
+## 🗂️ Archivos relacionados
+
+- `/Scripts/Systems/GameManager.cs`
+- `/Scripts/Interfaces/IIModulo.cs`
+- `/Scripts/Modulos/Modulo.cs`
+
+---
+
+## 📎 Notas adicionales
+
+- Los sistemas pueden evolucionar, por lo que este documento debe actualizarse al cambiar el diseño base.
+- Se recomienda mantener los diagramas en `/Docs/imgs/` o una ruta similar para mantener el orden.
