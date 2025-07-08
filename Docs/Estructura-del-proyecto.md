@@ -40,7 +40,8 @@ Usamos exclusivamente **C#** para toda la lógica del juego en Unity.
 
 ### Docs/
 
-Contiene documentación adicional como la arquitectura del sistema, estructura del proyecto, guías internas y notas de desarrollo.
+Consulta el archivo [`Analisis De Requerimiento PREVIEW`](./Markdown_AnalisisReq_Preview) para una descripción previa de los requerimientos del proyecto, dentro de este hay un hipervinculo para el proyecto completo.
+
 
 ### Proyecto-Unity/
 
