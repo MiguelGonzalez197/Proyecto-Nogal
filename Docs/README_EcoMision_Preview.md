@@ -1,18 +1,17 @@
-# EcoMisión: Simulador de Recolección de Basura
+# ♻️ EcoMisión: Simulador de Recolección de Basura
 
-## 1. Justificación de la necesidad
-Este videojuego tiene como objetivo promover la educación ambiental, específicamente la correcta separación de residuos, mediante una experiencia interactiva y lúdica. El proyecto ha sido desarrollado con el fin de participar en la convocatoria “Premios Fundación El Nogal 2025”.
+## 🧠 1. Justificación de la necesidad
+Este videojuego tiene como objetivo promover la educación ambiental, específicamente la correcta separación de residuos, mediante una experiencia interactiva y lúdica.  
+🎯 El proyecto ha sido desarrollado con el fin de participar en la convocatoria **Premios Fundación El Nogal 2025**.
 
-## 2. Equipo del Proyecto
-- Juan David Urrego Fonseca
-- Miguel Ángel González Contreras
-- Helen Viviana Gamboa Fonseca
-- Juan Pablo Rodríguez Rodríguez
+## 👥 2. Equipo del Proyecto
+- 👨‍💻 Juan David Urrego Fonseca
+- 👨‍💻 Miguel Ángel González Contreras
 
-## 3. Requerimientos Funcionales
+## ✅ 3. Requerimientos Funcionales
 
-| ID | Nombre | Actor | Relacionados | Casos de Uso |
-|----|--------|-------|--------------|--------------|
+| 🆔 ID | 📌 Nombre | 🧍 Actor | 🔗 Relacionados | 🧩 Casos de Uso |
+|------|-----------|----------|----------------|-----------------|
 | RF-001 | Generación aleatoria de bolsas | Sistema | RF-002, RF-003, RF-014 | CUS-001, CUS-004 |
 | RF-002 | Apertura de bolsas | Jugador | RF-001, RF-003 | CUS-001 |
 | RF-003 | Visualización de ítems | Jugador | RF-001, RF-002, RF-005 | CUS-001 |
@@ -28,10 +27,10 @@ Este videojuego tiene como objetivo promover la educación ambiental, específic
 | RF-013 | Resumen por bolsa | Sistema | RF-006, RF-012 | CUS-006 |
 | RF-014 | Clasificación por color | Jugador | RF-001, RF-006, RF-007 | CUS-001, CUS-006 |
 
-## 4. Requerimientos No Funcionales
+## 🛡️ 4. Requerimientos No Funcionales
 
-| ID | Nombre | Actor | Casos de Uso |
-|----|--------|-------|--------------|
+| 🆔 ID | ⚙️ Nombre | 🧍 Actor | 🧩 Casos de Uso |
+|------|-----------|----------|----------------|
 | RNF-001 | Escalabilidad modular | Programador | CUS-004, CUS-010 |
 | RNF-002 | Rendimiento | Sistema | CUS-005, CUS-006 |
 | RNF-003 | Compatibilidad | Sistema | CUS-010 |
@@ -42,37 +41,47 @@ Este videojuego tiene como objetivo promover la educación ambiental, específic
 | RNF-008 | Tolerancia al error | Sistema | CUS-007 |
 | RNF-009 | Control de sonido | Jugador | CUS-008 |
 
-## 5. Casos de Uso
+## 🧩 5. Casos de Uso
 
-### CUS-001: Clasificar ítems reciclables
+### 🔹 CUS-001: Clasificar ítems reciclables
 El jugador abre una bolsa, ve los ítems y los clasifica en las canecas. Si la bolsa es del color de la caneca, puede verterla completa.
 
-### CUS-002: Ver textos educativos
+### 🔹 CUS-002: Ver textos educativos
 El sistema muestra textos para ayudar al jugador a clasificar correctamente.
 
-### CUS-003: Cambiar entre zonas
+### 🔹 CUS-003: Cambiar entre zonas
 El jugador cambia entre la zona de apertura y de clasificación.
 
-### CUS-004: Generar bolsas aleatorias
+### 🔹 CUS-004: Generar bolsas aleatorias
 El sistema genera bolsas con ítems de diferentes rarezas.
 
-### CUS-005: Evaluar clasificación
+### 🔹 CUS-005: Evaluar clasificación
 Se suma o resta puntaje según los aciertos o errores.
 
-### CUS-006: Ver resumen final
+### 🔹 CUS-006: Ver resumen final
 Al terminar una bolsa, se muestra un resumen con desempeño.
 
-### CUS-007: Usar ayuda educativa
+### 🔹 CUS-007: Usar ayuda educativa
 El jugador accede a una guía explicativa en cualquier momento.
 
-### CUS-008: Controlar sonido
+### 🔹 CUS-008: Controlar sonido
 Permite activar o desactivar música y efectos.
 
-### CUS-010: Guardar y continuar
+### 🔹 CUS-010: Guardar y continuar
 El sistema guarda el progreso para continuar después.
 
-## 6. Observaciones Finales
-Este proyecto fue desarrollado con fines de impacto social, y está inscrito en los Premios Fundación El Nogal 2025.
+## 📌 6. Observaciones Finales
+Este proyecto fue desarrollado con fines de **impacto social**, y está inscrito en los **Premios Fundación El Nogal 2025**.
 
 ---
-Autor: Equipo EcoMisión
+
+## 📄 Ver documento completo en PDF
+
+📌 Esta es solo una **previsualización** en formato Markdown.  
+Para consultar el documento oficial y completo con diagramas, tablas y formato original:
+
+👉 [📥 Descargar Análisis de Requerimientos (PDF)](./F_Analisis_de_Requerimientos_V1,0_EcoMision.pdf)
+
+---
+
+✍️ Autor: **Equipo EcoMisión**
