@@ -1,21 +1,43 @@
-# 🕹️ [Nombre del Juego]
+# 🕹️ EcoMisión
 
-> [Nombre del Juego] es un videojuego desarrollado en Unity donde [explicación breve del juego: género, objetivo, mecánicas].
+> EcoMisión es un videojuego desarrollado en Unity donde el jugador aprende a clasificar residuos sólidos mediante minijuegos interactivos. Su objetivo es fomentar la conciencia ambiental usando mecánicas lúdicas de reciclaje en diferentes zonas de trabajo.
 
 ---
 
 ## 🎮 Características
 
-- ✅ Mecánica de [Movimiento / Reciclaje / etc.]
-- 🧠 Lógica del juego [explicación breve o ejemplo]
-- 🌎 Niveles creados con [tilemap / procedural / a mano]
-- 🔊 Efectos de sonido y música integrada
-- 🎯 Compatible con [teclado / mouse / gamepad / móvil]
+- ✅ Mecánica de **clasificación manual de residuos**: el jugador selecciona ítems y los lanza a la caneca correspondiente.
+- 🧠 Lógica del juego basada en **evaluación automática de aciertos y errores**, con retroalimentación visual y sonora.
+- 🌎 Niveles generados **aleatoriamente** con bolsas de basura de distintos niveles de rareza y dificultad.
+- 🔊 Efectos de sonido, música ambiental y posibilidad de activar/desactivar según preferencia del jugador.
+- 🎯 Compatible con **teclado y mouse** para escritorio, y diseñado también para dispositivos móviles Android 9+.
 
 ---
+
+## 📚 Funcionalidades educativas
+
+- 🧾 Textos interactivos que enseñan la correcta separación de residuos.
+- 🆘 Botón de ayuda disponible en cualquier momento con guías por tipo y color de residuo.
+- 🗣️ Soporte multilenguaje (Español / Inglés).
+
+---
+
+## 🧪 Requisitos Técnicos
+
+- 💻 Navegadores modernos o Windows 10+ (versión escritorio)
+- 📱 Android 9 o superior (versión móvil)
+- 🎮 Unity 2022 o superior
+
+---
+
+## 🏆 Propósito
+
+Desarrollado como parte de la participación en los **Premios Fundación El Nogal 2025**, con enfoque en educación ambiental y responsabilidad social.
 
 ## 📚 Documentacion
 
 > Es importante para nosotros que cada persona que entre a este repositorio entienda completamente cómo funciona nuestro proyecto.
 > 
 Consulta la [estructura del proyecto](Docs/Estructura-del-proyecto.md) para conocer cómo está organizado el código, los assets, y la arquitectura general del juego.
+
+---
