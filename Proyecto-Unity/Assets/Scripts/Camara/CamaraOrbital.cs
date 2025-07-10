@@ -3,15 +3,15 @@ using UnityEngine;
 public class CamaraOrbital : MonoBehaviour
 {
     [SerializeField] 
-    private Transform objetivoCamara;       // Punto alrededor del cual orbita la cámara
+    private Transform objetivoCamara;           // Punto alrededor del cual orbita la cámara
     [SerializeField]
-    private Transform pivoteVertical;       // Objeto que rota verticalmente (Pitch)
+    private Transform pivoteVertical;           // Objeto que rota verticalmente (Pitch)
     [SerializeField]
     private float velocidadRotacion = 0.2f;
     [SerializeField] 
-    private float anguloMinimo = 0f;        // Límite inferior del pitch
+    private float anguloMinimo = 0f;            // Límite inferior del pitch
     [SerializeField] 
-    private float anguloMaximo = 45f;       // Límite superior del pitch
+    private float anguloMaximo = 45f;           // Límite superior del pitch
 
     private Vector2 ultimaPosicionEntrada;
     private bool estaArrastrando = false;
