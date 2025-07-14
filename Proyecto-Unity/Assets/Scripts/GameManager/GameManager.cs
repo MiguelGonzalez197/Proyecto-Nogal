@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         camaraOrbital = GetComponentInChildren<CamaraOrbital>();
-        // Al arranque de la escena, disparo un mensaje de prueba
+        // mensajje de prueba
         GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
     }
 
