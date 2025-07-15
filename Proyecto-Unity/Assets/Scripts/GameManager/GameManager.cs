@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,15 +22,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        InteraccionTactilMovil();
-        InteraccionTactilPC();
+
     }
 
     public void MoverACamaraFija(Transform Destino)
     {
         if(camaraOrbital != null)
         {
-            Debug.Log("Moviendo");
             ultimaPosicionCamara = camara.position;
             ultimaRotacionCamara = camara.rotation;
 
@@ -40,10 +40,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public IEnumerator RotarCamara(Quaternion valor, float duracion)
+    public IEnumerator MoverCamara(Quaternion valorRotacion, Vector3 valorPosicion, float duracion)
     {
         float tiempo = 0f;
 
+        Vector3 inicioPos = camara.position;
         Quaternion inicioRot = camara.rotation;
 
         while (tiempo < duracion)
@@ -51,12 +52,14 @@ public class GameManager : MonoBehaviour
             tiempo += Time.deltaTime;
             float t = tiempo / duracion;
 
-            camara.rotation = Quaternion.Slerp(inicioRot, valor, t);
+            camara.position = Vector3.Lerp(inicioPos, valorPosicion, t);
+            camara.rotation = Quaternion.Slerp(inicioRot, valorRotacion, t);
 
             yield return null;
         }
 
-        camara.rotation = valor;
+        camara.position = valorPosicion;
+        camara.rotation = valorRotacion;
     }
 
     public void RestaurarCamara()
@@ -67,34 +70,5 @@ public class GameManager : MonoBehaviour
         camaraOrbital.enabled = true;
     }
 
-    private void InteraccionTactilPC()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-            ProcesarRaycast(rayo);
-        }
-    }
-
-    private void InteraccionTactilMovil()
-    {
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            Ray rayo = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            ProcesarRaycast(rayo);
-        }
-    }
-
-    private void ProcesarRaycast(Ray rayo)
-    {
-        if (Physics.Raycast(rayo, out RaycastHit impacto))
-        {
-            // Busca un componente que implemente la interfaz IInteractuable
-            var interactuable = impacto.collider.GetComponent<IInteractuable>();
-            if (interactuable != null)
-            {
-                interactuable.Interactuar();
-            }
-        }
-    }
+    
 }

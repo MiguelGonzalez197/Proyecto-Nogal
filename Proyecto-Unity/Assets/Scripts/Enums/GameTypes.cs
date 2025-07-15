@@ -6,7 +6,15 @@ public enum EstadoManager
     Interactuando
 }
 
-public enum EstadoModulo
+public enum ETipoItem
 {
+    Bolsa,
+    Residuo
+}
 
+public enum ETipoReciclaje
+{
+    Aprovechable,
+    NoAprovechable,
+    OrganicoAprovechable
 }

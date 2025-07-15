@@ -5,8 +5,10 @@ public class GestorCajaTexto : MonoBehaviour
     public static GestorCajaTexto Instancia { get; private set; }
 
     [Header("Prefab y Padre")]
-    public GameObject prefabCajaTexto;    // prefab con CajaTextoReutilizable
-    public Transform contenedorCanvas;    
+    [SerializeField]
+    private GameObject prefabCajaTexto;    // prefab con CajaTextoReutilizable
+    [SerializeField]
+    private Transform contenedorCanvas;    
 
     void Awake()
     {

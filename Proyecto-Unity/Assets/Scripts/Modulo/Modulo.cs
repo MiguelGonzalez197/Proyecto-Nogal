@@ -5,50 +5,67 @@ public class Modulo : MonoBehaviour , IInteractuable
 {
     [Header("Referencias")]
     [SerializeField]
-    private GameManager GameManager;
+    protected GameManager gameManager;
     [SerializeField] 
-    private Transform PuntoCamara;
+    protected Transform puntoCamaraMesa;
+    [SerializeField]
+    protected GameObject canvaModulo;
 
     [Header("Valores")]
     [SerializeField]
-    private Vector3 RotacionCamara = new Vector3(0f, 180f, 0f);
+    protected Vector3 rotacionCamaraCanecas = new Vector3(45f, 180f, 0f);
     [Range(0, 2)]
     [SerializeField]
-    private float duracionRotacionCamara = 0.5f;
+    protected float duracionRotacionCamara = 0.5f;
 
-    void Start()
-    {
-        
-    }
+    protected BoxCollider boxCollider;
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Start()
     {
-        
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     public virtual void Interactuar()
     {
-        Debug.Log("Interactuando");
-        if(GameManager != null)
+        if(gameManager != null)
         {
-            GameManager.MoverACamaraFija(PuntoCamara);
-            StartCoroutine(RotarCamara());
-            StartCoroutine(VolverCamara());
+            gameManager.MoverACamaraFija(puntoCamaraMesa);
+        }
+
+        ActivarCanva(true);
+        ActivarCollider(false);
+        //StartCoroutine(RotarCamara());
+    }
+
+    protected void ActivarCanva(bool bActivar)
+    {
+        if(canvaModulo != null)
+        {
+            canvaModulo.SetActive(bActivar);
+        }
+        
+    }
+
+    protected void ActivarCollider(bool bActivar)
+    {
+        if(boxCollider != null)
+        {
+            Debug.Log("Desactivando");
+            boxCollider.enabled = bActivar;
         }
     }
 
-    private IEnumerator RotarCamara()
+    private IEnumerator RotarCamara(Vector3 rotacionCamara)
     {
         Debug.Log("Volviendo Camara");
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(GameManager.RotarCamara(Quaternion.Euler(RotacionCamara), duracionRotacionCamara));
+        yield return new WaitForSeconds(10f);
+
     }
 
     private IEnumerator VolverCamara()
     {
         Debug.Log("Volviendo Camara");
         yield return new WaitForSeconds(10f);
-        GameManager.RestaurarCamara();
+        gameManager.RestaurarCamara();
     }
 }
