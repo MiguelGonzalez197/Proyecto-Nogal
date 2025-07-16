@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 101380501524902030}
   - component: {fileID: 2777835100981298244}
   - component: {fileID: 1849266125243057884}
-  m_Layer: 0
+  - component: {fileID: 1298631835864996910}
+  - component: {fileID: 2352394144439601222}
+  m_Layer: 3
   m_Name: Plunger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,3 +105,51 @@ MonoBehaviour:
     tipoItem: 1
     tipoReciclaje: 0
   velocidadRotacion: 90
+--- !u!54 &1298631835864996910
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434961783739229585}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &2352394144439601222
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434961783739229585}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18227147, y: 0.48343253, z: 0.18227147}
+  m_Center: {x: 0, y: 0.2434183, z: 0}

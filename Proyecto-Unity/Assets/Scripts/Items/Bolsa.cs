@@ -32,55 +32,44 @@ public class Bolsa : MonoBehaviour
     {
         for (int i = 0; i < residuos.Count; i++)
         {
-            int tipo = Random.Range(0, 3);
-            switch (tipo)
-            {
-                case (int)ETipoReciclaje.Aprovechable:
-                    residuos[i] = EscogerAprovechables();
-                    break;
-                case (int)ETipoReciclaje.NoAprovechable:
-                    residuos[i] = EscogerNoAprovechables();
-                    break;
-                case (int)ETipoReciclaje.OrganicoAprovechable:
-                    residuos[i] = EscogerOrganicosAprovechables();
-                    break;
-            }
+            residuos[i] = EscogerResiduoParaBolsa(DatosBolsa.tipoReciclaje);
         }
     }
 
-    private GameObject EscogerAprovechables()
+    private GameObject EscogerResiduoParaBolsa(ETipoReciclaje tipoBolsa)
     {
-        if(prefabsAprovechables != null)
+        switch (tipoBolsa)
         {
-            int numeroPrefab = Random.Range(0, prefabsAprovechables.Count);
+            case ETipoReciclaje.Aprovechable:
+                return EscogerDeLista(prefabsAprovechables);
 
-            return prefabsAprovechables[numeroPrefab];
+            case ETipoReciclaje.NoAprovechable:
+                return EscogerResiduoAleatorioDeCualquierLista();
+
+            case ETipoReciclaje.OrganicoAprovechable:
+                return EscogerDeLista(prefabsOrganicosAprovechables);
+
+            default:
+                return null;
         }
-
-        return null;
     }
 
-    private GameObject EscogerNoAprovechables()
+    private GameObject EscogerDeLista(List<GameObject> lista)
     {
-        if (prefabsNoAprovechables != null)
-        {
-            int numeroPrefab = Random.Range(0, prefabsNoAprovechables.Count);
+        if (lista == null || lista.Count == 0)
+            return null;
 
-            return prefabsNoAprovechables[numeroPrefab];
-        }
-
-        return null;
+        int index = Random.Range(0, lista.Count);
+        return lista[index];
     }
 
-    private GameObject EscogerOrganicosAprovechables()
+    private GameObject EscogerResiduoAleatorioDeCualquierLista()
     {
-        if (prefabsOrganicosAprovechables != null)
-        {
-            int numeroPrefab = Random.Range(0, prefabsOrganicosAprovechables.Count);
+        List<GameObject> todosLosPrefabs = new List<GameObject>();
+        todosLosPrefabs.AddRange(prefabsAprovechables);
+        todosLosPrefabs.AddRange(prefabsNoAprovechables);
+        todosLosPrefabs.AddRange(prefabsOrganicosAprovechables);
 
-            return prefabsOrganicosAprovechables[numeroPrefab];
-        }
-
-        return null;
+        return EscogerDeLista(todosLosPrefabs);
     }
 }

@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6037208006650845035}
   - component: {fileID: 8371224119424951201}
   - component: {fileID: 2761521246448241357}
-  m_Layer: 0
+  - component: {fileID: 1357964416194862520}
+  - component: {fileID: 7090255291138355605}
+  m_Layer: 3
   m_Name: Wrench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,3 +105,51 @@ MonoBehaviour:
     tipoItem: 1
     tipoReciclaje: 0
   velocidadRotacion: 90
+--- !u!54 &1357964416194862520
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010904881565926004}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7090255291138355605
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010904881565926004}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07752153, y: 0.29610935, z: 0.024646685}
+  m_Center: {x: -0.001254512, y: 0.14764924, z: -0.000000010244548}

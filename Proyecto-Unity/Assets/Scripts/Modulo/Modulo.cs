@@ -1,4 +1,6 @@
+
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Modulo : MonoBehaviour , IInteractuable
@@ -6,30 +8,32 @@ public class Modulo : MonoBehaviour , IInteractuable
     [Header("Referencias")]
     [SerializeField]
     protected GameManager gameManager;
-    [SerializeField] 
-    protected Transform puntoCamaraMesa;
+    [SerializeField]
+    protected List<Transform> posicionesCamara = new List<Transform>();
+    [SerializeField]
+    protected List<Transform> posicionesItems = new List<Transform>();
     [SerializeField]
     protected GameObject canvaModulo;
 
     [Header("Valores")]
-    [SerializeField]
-    protected Vector3 rotacionCamaraCanecas = new Vector3(45f, 180f, 0f);
     [Range(0, 2)]
     [SerializeField]
-    protected float duracionRotacionCamara = 0.5f;
+    protected float duracionMovimientoCamara = 0.5f;
 
     protected BoxCollider boxCollider;
 
     protected virtual void Start()
     {
+        
         boxCollider = GetComponent<BoxCollider>();
+        
     }
 
     public virtual void Interactuar()
     {
         if(gameManager != null)
         {
-            gameManager.MoverACamaraFija(puntoCamaraMesa);
+            gameManager.MoverACamaraFija(posicionesCamara[0]);
         }
 
         ActivarCanva(true);
@@ -62,10 +66,12 @@ public class Modulo : MonoBehaviour , IInteractuable
 
     }
 
-    private IEnumerator VolverCamara()
+    protected IEnumerator VolverCamara()
     {
         Debug.Log("Volviendo Camara");
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(1.5f);
         gameManager.RestaurarCamara();
+        ActivarCanva(false);
+        ActivarCollider(true);
     }
 }

@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3767619497444420134}
   - component: {fileID: 1417985932179693292}
   - component: {fileID: 5089031196191838282}
-  m_Layer: 0
+  - component: {fileID: 6433540144060653910}
+  - component: {fileID: -3397678559599250749}
+  m_Layer: 3
   m_Name: PillBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,5 +103,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DatosResiduo:
     tipoItem: 1
-    tipoReciclaje: 0
+    tipoReciclaje: 1
   velocidadRotacion: 90
+--- !u!54 &6433540144060653910
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625242516236402489}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-3397678559599250749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625242516236402489}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08742609, y: 0.18524575, z: 0.087426096}
+  m_Center: {x: 0, y: 0.09329283, z: -0.0000000018626451}

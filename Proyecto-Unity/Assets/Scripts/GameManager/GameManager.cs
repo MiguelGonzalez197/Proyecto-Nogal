@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public IEnumerator MoverCamara(Quaternion valorRotacion, Vector3 valorPosicion, float duracion)
+    public IEnumerator MoverCamara(Transform valorPosicion, float duracion)
     {
         float tiempo = 0f;
 
@@ -52,14 +52,14 @@ public class GameManager : MonoBehaviour
             tiempo += Time.deltaTime;
             float t = tiempo / duracion;
 
-            camara.position = Vector3.Lerp(inicioPos, valorPosicion, t);
-            camara.rotation = Quaternion.Slerp(inicioRot, valorRotacion, t);
+            camara.position = Vector3.Lerp(inicioPos, valorPosicion.position, t);
+            camara.rotation = Quaternion.Slerp(inicioRot, valorPosicion.rotation, t);
 
             yield return null;
         }
 
-        camara.position = valorPosicion;
-        camara.rotation = valorRotacion;
+        camara.position = valorPosicion.position;
+        camara.rotation = valorPosicion.rotation;
     }
 
     public void RestaurarCamara()

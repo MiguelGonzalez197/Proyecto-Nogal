@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class Residuo : MonoBehaviour , IItem
 {
+    public event System.Action EnItemDestruido;
+
     [SerializeField]
     private DatosItem DatosResiduo;
 
     [SerializeField]
     private float velocidadRotacion;
 
-    Vector3 rotacion;
-    Vector3 nuevaRotacion;
+    private Vector3 rotacion;
+    private Vector3 nuevaRotacion;
+    private Rigidbody rigidbodyItem;
 
     void Start()
     {
-        
+        rigidbodyItem = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,7 +26,14 @@ public class Residuo : MonoBehaviour , IItem
         rotacion = new Vector3(0f, velocidadRotacion * Time.deltaTime, 0f);
         nuevaRotacion = transform.eulerAngles + rotacion;
         transform.eulerAngles = nuevaRotacion;
-        //transform.eulerAngles += velocidadRotacion;
+    }
+
+    private void OnDestroy()
+    {
+        if(EnItemDestruido != null)
+        {
+            EnItemDestruido();
+        }
     }
 
     public DatosItem ObtenerDatosItem() { return DatosResiduo; }
@@ -31,6 +41,15 @@ public class Residuo : MonoBehaviour , IItem
     public void MoverHaciaPosicion(Transform posicion, float duracion)
     {
         StartCoroutine(InterpolarPosicion(posicion, duracion));
+    }
+
+    public void TerminarInteraccionItem()
+    {
+        if(rigidbodyItem != null)
+        {
+            rigidbodyItem.useGravity = true;
+            StartCoroutine(DestruirItem());
+        }
     }
 
     private IEnumerator InterpolarPosicion(Transform posicion, float duracion)
@@ -51,5 +70,11 @@ public class Residuo : MonoBehaviour , IItem
 
         transform.position = posicion.position;
     }
-    
+
+    private IEnumerator DestruirItem()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
 }
