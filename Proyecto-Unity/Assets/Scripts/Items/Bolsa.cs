@@ -1,10 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Bolsa : MonoBehaviour
+public class Bolsa : Item
 {
-    [SerializeField]
-    private DatosItem DatosBolsa;
 
     [Header("Contenido")]
     [SerializeField]
@@ -18,8 +16,11 @@ public class Bolsa : MonoBehaviour
     [SerializeField]
     private List<GameObject> prefabsOrganicosAprovechables = new List<GameObject>();
 
-    void Start()
+
+    protected override void Start()
     {
+        base.Start();
+        rigidbodyItem.useGravity = false;
         CrearContenido();
     }
 
@@ -28,11 +29,18 @@ public class Bolsa : MonoBehaviour
         return residuos;
     }
 
+    public override void MoverHaciaPosicion(Transform posicion, float duracion)
+    {
+        
+        base.MoverHaciaPosicion(posicion, duracion);
+    }
+
+
     private void CrearContenido()
     {
         for (int i = 0; i < residuos.Count; i++)
         {
-            residuos[i] = EscogerResiduoParaBolsa(DatosBolsa.tipoReciclaje);
+            residuos[i] = EscogerResiduoParaBolsa(datosItem.tipoReciclaje);
         }
     }
 

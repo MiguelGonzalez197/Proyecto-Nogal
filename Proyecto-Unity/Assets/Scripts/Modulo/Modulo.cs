@@ -1,26 +1,38 @@
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Modulo : MonoBehaviour , IInteractuable
 {
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
+
     [Header("Referencias")]
     [SerializeField]
-    protected GameManager gameManager;
+    protected GameManager gameManager;                                    // GamaManager principal para manejar movimientos de camara, inventario o estadisticas
     [SerializeField]
-    protected List<Transform> posicionesCamara = new List<Transform>();
+    protected List<Transform> posicionesCamara = new List<Transform>();   // Posiciones donde la camara se puede mover
     [SerializeField]
-    protected List<Transform> posicionesItems = new List<Transform>();
+    protected List<Transform> posicionesItems = new List<Transform>();    // Posiciones donde los items de cada modulo se pueden generar o mover
     [SerializeField]
-    protected GameObject canvaModulo;
+    protected GameObject canvaModulo;                                     // Interfaz propia de cada modulo
 
     [Header("Valores")]
     [Range(0, 2)]
     [SerializeField]
-    protected float duracionMovimientoCamara = 0.5f;
+    protected float duracionMovimientoCamara = 0.5f;                      
 
-    protected BoxCollider boxCollider;
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
+
+    protected BoxCollider boxCollider;                                     // Referencia al collider del modulo
+
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
 
     protected virtual void Start()
     {
@@ -29,17 +41,28 @@ public class Modulo : MonoBehaviour , IInteractuable
         
     }
 
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PÚBLICOS
+    // ───────────────────────────────────────
+
+    /// <summary>
+    /// Establece la posicion de la camara al interactuar con el modulo
+    /// Activa el canva establecido al modulo
+    /// </summary>
     public virtual void Interactuar()
     {
-        if(gameManager != null)
+        if(gameManager != null || posicionesCamara.Count > 0)
         {
             gameManager.MoverACamaraFija(posicionesCamara[0]);
         }
 
         ActivarCanva(true);
         ActivarCollider(false);
-        //StartCoroutine(RotarCamara());
     }
+
+    // ───────────────────────────────────────
+    // 5. MÉTODOS PROTEGIDOS
+    // ───────────────────────────────────────
 
     protected void ActivarCanva(bool bActivar)
     {
@@ -59,14 +82,7 @@ public class Modulo : MonoBehaviour , IInteractuable
         }
     }
 
-    private IEnumerator RotarCamara(Vector3 rotacionCamara)
-    {
-        Debug.Log("Volviendo Camara");
-        yield return new WaitForSeconds(10f);
-
-    }
-
-    protected IEnumerator VolverCamara()
+    protected IEnumerator SalirModulo()
     {
         Debug.Log("Volviendo Camara");
         yield return new WaitForSeconds(1.5f);

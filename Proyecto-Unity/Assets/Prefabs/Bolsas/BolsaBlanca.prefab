@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5038319471272601529}
   - component: {fileID: 7537759996060214898}
   - component: {fileID: 1082171341436437935}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BolsaBlanca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.0869212, y: 0.05000007, z: 0.6393331}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5512062227750008555}
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a8bedc434e6214d84ee7f35586d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DatosBolsa:
+  datosItem:
     tipoItem: 0
     tipoReciclaje: 0
   residuos:
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 7994108254176445763}
   - component: {fileID: 1281251575410683192}
   - component: {fileID: 4875936523956222706}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trash bag_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 5512062227750008555}
   - component: {fileID: 6484260896168283522}
   - component: {fileID: 4333368517435593254}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trash bag_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,14 +7,15 @@ public class GameManager : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField]
-    private Transform camara;                   // Referencia Camara
+    private Transform camara;                   
 
-    private CamaraOrbital camaraOrbital;        // Referencia script CamaraOrbital
+    private CamaraOrbital camaraOrbital;        
     private Vector3 ultimaPosicionCamara;       // Registro ultima posicion de la camara antes de mover a punto fijo
     private Quaternion ultimaRotacionCamara;    // Registro ultima rotacion de la camara antes de mover a punto fijo
 
     void Start()
     {
+        //Application.targetFrameRate = 60;
         camaraOrbital = GetComponentInChildren<CamaraOrbital>();
         // mensajje de prueba
         GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);

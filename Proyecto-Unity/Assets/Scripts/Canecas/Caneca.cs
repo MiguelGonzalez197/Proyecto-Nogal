@@ -6,6 +6,7 @@ public class Caneca : MonoBehaviour
     [Header("Tipo de reciclaje permitido")]
     [SerializeField]
     private ETipoReciclaje tipoCaneca;
+
     [Header("Contenido")]
     [SerializeField]
     private int cantidad = 0;
