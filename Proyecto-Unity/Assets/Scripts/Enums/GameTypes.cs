@@ -18,3 +18,4 @@ public enum ETipoReciclaje
     NoAprovechable,
     OrganicoAprovechable
 }
+

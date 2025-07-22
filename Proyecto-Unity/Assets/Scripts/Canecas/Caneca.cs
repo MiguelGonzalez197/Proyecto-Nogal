@@ -7,45 +7,96 @@ public class Caneca : MonoBehaviour
     [SerializeField]
     private ETipoReciclaje tipoCaneca;
 
-    [Header("Contenido")]
+    [Header("Referencias")]
     [SerializeField]
-    private int cantidad = 0;
-    [SerializeField]
-    private List<GameObject> residuosRecolectados = new List<GameObject>();
+    private Inventario gestorInventario;
 
     private GameObject itemActual;
+
     private IItem interfaceItemActual;
     private DatosItem datosItemActual;
-    
+    private HashSet<GameObject> itemsProcesados = new HashSet<GameObject>();
+
 
     private void OnTriggerEnter(Collider other)
     {
+        if (itemsProcesados.Contains(other.gameObject)) return;
+        Debug.Log("Entrando");
         itemActual = other.gameObject;
-        interfaceItemActual = other.GetComponent<IItem>();
-        if(interfaceItemActual != null)
+        ProcesarItem(other.gameObject);
+    }
+
+    private void ProcesarItem(GameObject item)
+    {
+        IItem interfaceItem = item.GetComponent<IItem>();
+        if (interfaceItem == null) return;
+
+        DatosItem datosItem = interfaceItem.ObtenerDatosItem();
+
+        if (datosItem.tipoReciclaje != tipoCaneca)
         {
-            datosItemActual = interfaceItemActual.ObtenerDatosItem();
-            ValidarItem(interfaceItemActual); 
+            itemsProcesados.Add(itemActual);
+            gestorInventario.DisminuirDinero();
+            Debug.Log("Este item no pertenece a esta caneca");
+            return;
+        } 
+            
+
+        ValidarItem(item, datosItem);
+    }
+
+    private void ValidarItem(GameObject item, DatosItem datosItem)
+    {
+        switch (datosItem.tipoItem)
+        {
+            case ETipoItem.Residuo:
+                if (itemsProcesados.Contains(item)) return;
+                itemsProcesados.Add(itemActual);
+                AgregarItem(datosItem);
+                break;
+
+            case ETipoItem.Bolsa:
+                itemsProcesados.Add(itemActual);
+
+                Debug.Log("Bolsa");
+                if (EsBolsaNegra(datosItem))
+                {
+                    Debug.Log("Es bolsa negra");
+                    gestorInventario.DisminuirDinero();
+                    return;
+                }
+                
+                AgregarContenidoBolsa(item);
+                break;
+
+            default:
+                break;
         }
     }
 
-    private void ValidarItem(IItem item)
+    private bool EsBolsaNegra(DatosItem datosItem)
     {
-        if(datosItemActual.tipoReciclaje == tipoCaneca)
+        return datosItem.tipoReciclaje == ETipoReciclaje.NoAprovechable;
+    }
+
+    private void AgregarContenidoBolsa(GameObject bolsa)
+    {
+        Bolsa bolsaActual = bolsa.GetComponent<Bolsa>();
+        if (bolsaActual == null) return;
+
+        foreach (GameObject residuo in bolsaActual.ObtenerContenido())
         {
-            Debug.Log("Item Valido");
-            AgregarItem();
-        }
-        else
-        {
-            Debug.Log("Item Invalido");
+            ProcesarItem(residuo); // Reutiliza el mismo flujo
         }
     }
 
-    private void AgregarItem()
+    private void AgregarItem(DatosItem datosItem)
     {
-        residuosRecolectados.Add(itemActual);
-        cantidad = residuosRecolectados.Count;
+        if (gestorInventario != null)
+        {
+            gestorInventario.AgregarItemInventario(datosItem);
+            gestorInventario.AgregarDinero();
+        }
     }
 
 

@@ -77,14 +77,12 @@ public class Modulo : MonoBehaviour , IInteractuable
     {
         if(boxCollider != null)
         {
-            Debug.Log("Desactivando");
             boxCollider.enabled = bActivar;
         }
     }
 
     protected IEnumerator SalirModulo()
     {
-        Debug.Log("Volviendo Camara");
         yield return new WaitForSeconds(1.5f);
         gameManager.RestaurarCamara();
         ActivarCanva(false);
