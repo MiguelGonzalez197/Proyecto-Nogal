@@ -19,6 +19,8 @@ public class Inventario : MonoBehaviour
     [SerializeField]
     List<DatosItem> organicosAprovechables = new List<DatosItem>();
 
+    public int ObtenerDinero() { return dinero; }
+
     public void AgregarItemInventario(DatosItem datosItem)
     {
         switch(datosItem.tipoReciclaje)
@@ -41,9 +43,15 @@ public class Inventario : MonoBehaviour
         dinero += ganancias;
     }
 
-    public void DisminuirDinero()
+    public void DisminuirDineroError()
     {
         dinero -= perdidasPenitencias;
+        dinero = Mathf.Clamp(dinero, 0, 100000);
+    }
+
+    public void DisminuirDineroCompra(int cantidad)
+    {
+        dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
     }
 }

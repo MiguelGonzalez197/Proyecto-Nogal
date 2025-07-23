@@ -21,7 +21,6 @@ public class Caneca : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (itemsProcesados.Contains(other.gameObject)) return;
-        Debug.Log("Entrando");
         itemActual = other.gameObject;
         ProcesarItem(other.gameObject);
     }
@@ -36,7 +35,7 @@ public class Caneca : MonoBehaviour
         if (datosItem.tipoReciclaje != tipoCaneca)
         {
             itemsProcesados.Add(itemActual);
-            gestorInventario.DisminuirDinero();
+            gestorInventario.DisminuirDineroError();
             Debug.Log("Este item no pertenece a esta caneca");
             return;
         } 
@@ -62,7 +61,7 @@ public class Caneca : MonoBehaviour
                 if (EsBolsaNegra(datosItem))
                 {
                     Debug.Log("Es bolsa negra");
-                    gestorInventario.DisminuirDinero();
+                    gestorInventario.DisminuirDineroError();
                     return;
                 }
                 

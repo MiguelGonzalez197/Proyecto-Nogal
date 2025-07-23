@@ -39,6 +39,25 @@ public class AnimacionesRecicladora : MonoBehaviour
         }
     }
 
+    public void CompraExitosa()
+    {
+        StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));
+        if (animatorRecicladora != null)
+        {
+            animatorRecicladora.CrossFade("Emocionada", 0.1f);
+        }
+        
+    }
+
+    public void CompraFallida()
+    {
+        StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));
+        if (animatorRecicladora != null)
+        {
+            animatorRecicladora.CrossFade("GestoNo", 0.1f);
+        }
+    }
+
     private void ElegirSiguienteAnimacion()
     {
         if (animaciones.Count <= 1) return;

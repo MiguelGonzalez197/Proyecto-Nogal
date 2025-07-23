@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         //Application.targetFrameRate = 60;
         camaraOrbital = GetComponentInChildren<CamaraOrbital>();
         // mensajje de prueba
-        GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
+        //GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
     }
 
     void Update()

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1dcb0e14daad017449f13bc7e29ac21d
+guid: 5bcaf86df0ace3b42beed0ad15f3419d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -35,7 +35,7 @@ ModelImporter:
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 125
+      lastFrame: 54
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -55,7 +55,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.92161256
+      - time: 0.9529675
         functionName: VolverAInactiva
         data: 
         objectReferenceParameter: {instanceID: 0}

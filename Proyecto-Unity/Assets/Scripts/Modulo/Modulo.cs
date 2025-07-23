@@ -60,6 +60,14 @@ public class Modulo : MonoBehaviour , IInteractuable
         ActivarCollider(false);
     }
 
+    /** Callback Boton */
+    public void SalirModuloCallback()
+    {
+        gameManager.RestaurarCamara();
+        ActivarCanva(false);
+        ActivarCollider(true);
+    }
+
     // ───────────────────────────────────────
     // 5. MÉTODOS PROTEGIDOS
     // ───────────────────────────────────────
