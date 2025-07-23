@@ -9,9 +9,19 @@ public struct DatosItem
 }
 
 [System.Serializable]
-public struct DatosCompra
+public class ObjetoComprable
 {
     public GameObject objetoAVenta;
     public Button botonObjeto;
     public int precio;
+}
+
+[System.Serializable]
+public class ObjetoCrafteable
+{
+    public GameObject objetoACraftear;
+    public Button botonObjeto;
+    public int aprovechablesNecesarios;
+    public int noAprovechablesNecesarios;
+    public int organicosAprovechablesNecesarios;
 }

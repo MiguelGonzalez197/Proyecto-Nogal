@@ -18,14 +18,16 @@ public class UIModuloCompra : MonoBehaviour
     [SerializeField]
     private GameObject prefabBoton;
 
-    private List<DatosCompra> decoracionesDisponibles = new List<DatosCompra>();
-    private List<DatosCompra> modulosDisponibles = new List<DatosCompra>();
+    private List<ObjetoComprable> decoracionesDisponibles = new List<ObjetoComprable>();
+    private List<ObjetoComprable> modulosDisponibles = new List<ObjetoComprable>();
 
     void Start()
     {
         moduloCompra = GetComponent<ModuloCompra>();
-        GenerarUIDecoraciones();
-        GenerarUIModulos();
+        ObtenerListas();
+        GenerarUI(ref decoracionesDisponibles, ContenedorDecoraciones);
+        GenerarUI(ref modulosDisponibles, ContenedorModulos);
+        EstablecerListas();
     }
 
     public void CambiarAContenidoDecoraciones()
@@ -40,46 +42,48 @@ public class UIModuloCompra : MonoBehaviour
         ContenedorDecoraciones.SetActive(false);
     }
 
-    private void GenerarUIDecoraciones()
+
+    private void ObtenerListas()
     {
+        if (moduloCompra == null) return;
         decoracionesDisponibles = moduloCompra.ObtenerDecoracionesDisponibles();
-        GenerarBotones(ref decoracionesDisponibles, ContenedorDecoraciones);
-        InicializarBotones(ref decoracionesDisponibles);
-        moduloCompra.EstablecerDecoracionesDisponibles(decoracionesDisponibles);
-    }
-    private void GenerarUIModulos()
-    {
         modulosDisponibles = moduloCompra.ObtenerModulosDisponibles();
-        GenerarBotones(ref modulosDisponibles, ContenedorModulos);
-        InicializarBotones(ref modulosDisponibles);
+    }
+
+    private void GenerarUI(ref List<ObjetoComprable> lista, GameObject contenedor)
+    {
+        GenerarBotones(ref lista, contenedor);
+        InicializarBotones(ref lista);
+    }
+
+    private void EstablecerListas()
+    {
+        moduloCompra.EstablecerDecoracionesDisponibles(decoracionesDisponibles);
         moduloCompra.EstablecerModulosDisponibles(modulosDisponibles);
     }
 
-
-    private void GenerarBotones(ref List<DatosCompra> lista, GameObject contenedor)
+    private void GenerarBotones(ref List<ObjetoComprable> lista, GameObject contenedor)
     {
         for (int i = 0; i < lista.Count; i++)
         {
             GameObject instanciaBoton = Instantiate(prefabBoton, contenedor.transform.position, Quaternion.identity);
             instanciaBoton.transform.SetParent(contenedor.transform, false);
 
-            DatosCompra copiaDatos = lista[i];
-            copiaDatos.botonObjeto = instanciaBoton.GetComponent<Button>();
+            lista[i].botonObjeto = instanciaBoton.GetComponent<Button>();
 
-            lista[i] = copiaDatos;
 
-            EstablecerTextoPrecioBotones(copiaDatos);
+            EstablecerTextoPrecioBotones(lista[i]);
 
         }
     }
 
-    private static void EstablecerTextoPrecioBotones(DatosCompra copiaDatosInstancia)
+    private static void EstablecerTextoPrecioBotones(ObjetoComprable copiaDatosInstancia)
     {
         TextMeshProUGUI precio = copiaDatosInstancia.botonObjeto.GetComponentInChildren<TextMeshProUGUI>();
         precio.text = (copiaDatosInstancia.precio).ToString() + (" $");
     }
 
-    private void InicializarBotones(ref List<DatosCompra> lista)
+    private void InicializarBotones(ref List<ObjetoComprable> lista)
     {
         for (int i = 0; i < lista.Count; i++)
         {
@@ -90,7 +94,7 @@ public class UIModuloCompra : MonoBehaviour
         
     }
 
-    private void AsignarCallbackCompra(List<DatosCompra> lista, int i, int indexCapturado)
+    private void AsignarCallbackCompra(List<ObjetoComprable> lista, int i, int indexCapturado)
     {
         lista[i].botonObjeto.onClick.AddListener(() =>
         {

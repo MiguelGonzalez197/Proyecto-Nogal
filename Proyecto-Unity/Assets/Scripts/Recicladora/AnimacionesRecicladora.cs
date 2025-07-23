@@ -32,29 +32,25 @@ public class AnimacionesRecicladora : MonoBehaviour
 
     public void SaludarModulo()
     {
-        StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));
-        if (animatorRecicladora != null)
-        {
-            animatorRecicladora.CrossFade("SaludandoDos", 0.1f);
-        }
+        IniciarAnimacionModulo("SaludandoDos");
     }
 
     public void CompraExitosa()
     {
-        StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));
-        if (animatorRecicladora != null)
-        {
-            animatorRecicladora.CrossFade("Emocionada", 0.1f);
-        }
-        
+        IniciarAnimacionModulo("Emocionada");
     }
 
     public void CompraFallida()
     {
+        IniciarAnimacionModulo("GestoNo");
+    }
+
+    private void IniciarAnimacionModulo(string animacion)
+    {
         StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));
         if (animatorRecicladora != null)
         {
-            animatorRecicladora.CrossFade("GestoNo", 0.1f);
+            animatorRecicladora.CrossFade(animacion, 0.1f);
         }
     }
 

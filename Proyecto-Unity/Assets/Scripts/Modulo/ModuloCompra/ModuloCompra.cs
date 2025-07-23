@@ -11,9 +11,9 @@ public class ModuloCompra : Modulo
     [SerializeField]
     private AnimacionesRecicladora recicladora;
     [SerializeField]
-    private List<DatosCompra> decoracionesDisponibles = new List<DatosCompra>();
+    private List<ObjetoComprable> decoracionesDisponibles = new List<ObjetoComprable>();
     [SerializeField]
-    private List<DatosCompra> modulosDisponibles = new List<DatosCompra>();
+    private List<ObjetoComprable> modulosDisponibles = new List<ObjetoComprable>();
 
 
     protected override void Start()
@@ -31,20 +31,24 @@ public class ModuloCompra : Modulo
         }
     }
 
-    public List<DatosCompra> ObtenerDecoracionesDisponibles() { return decoracionesDisponibles; }
-    public List<DatosCompra> ObtenerModulosDisponibles() { return modulosDisponibles; }
-    public void EstablecerDecoracionesDisponibles(List<DatosCompra> lista) { decoracionesDisponibles = lista; }
-    public void EstablecerModulosDisponibles(List<DatosCompra> lista) { decoracionesDisponibles = lista; }
+    public List<ObjetoComprable> ObtenerDecoracionesDisponibles() { return decoracionesDisponibles; }
+    public List<ObjetoComprable> ObtenerModulosDisponibles() { return modulosDisponibles; }
+    public void EstablecerDecoracionesDisponibles(List<ObjetoComprable> lista) { decoracionesDisponibles = lista; }
+    public void EstablecerModulosDisponibles(List<ObjetoComprable> lista) { modulosDisponibles = lista; }
 
     /* Callback boton */
-    public void ComprarObjeto(Button botonOprimido, List<DatosCompra> listaAsociada)
+    public void ComprarObjeto(Button botonOprimido, List<ObjetoComprable> listaAsociada)
     {
         if (gestorInventario == null) return;
 
-        DatosCompra objetoAComprar = ObtenerEstructuraObjeto(botonOprimido, listaAsociada);
+        ObjetoComprable objetoAComprar = ObtenerEstructuraObjeto(botonOprimido, listaAsociada);
         int cantidadDineroActual = gestorInventario.ObtenerDinero();
+        ProcesarCompra(objetoAComprar, cantidadDineroActual);
+    }
 
-        if (cantidadDineroActual >= objetoAComprar.precio)
+    private void ProcesarCompra(ObjetoComprable objetoAComprar, int cantidadDineroActual)
+    {
+        if (PuedeComprar(objetoAComprar, cantidadDineroActual))
         {
             Debug.Log("Puedes comprar este objeto");
             recicladora.CompraExitosa();
@@ -58,15 +62,14 @@ public class ModuloCompra : Modulo
         }
     }
 
-
-    private DatosCompra ObtenerEstructuraObjeto(Button botonOprimido, List<DatosCompra> lista)
+    private ObjetoComprable ObtenerEstructuraObjeto(Button botonOprimido, List<ObjetoComprable> lista)
     {
         int index = HallarBotonEnLista(botonOprimido, lista);
         return lista[index];
     }
 
 
-    private static void ActivarObjeto(DatosCompra objetosAComprar)
+    private static void ActivarObjeto(ObjetoComprable objetosAComprar)
     {
         if (objetosAComprar.objetoAVenta != null)
         {
@@ -77,11 +80,15 @@ public class ModuloCompra : Modulo
 
 
 
-    private int HallarBotonEnLista(Button botonOprimido, List<DatosCompra> lista)
+    private int HallarBotonEnLista(Button botonOprimido, List<ObjetoComprable> lista)
     {
         return lista.FindIndex(boton => boton.botonObjeto == botonOprimido);
     }
 
+    private bool PuedeComprar(ObjetoComprable objetoAComprar, int cantidadDineroActual)
+    {
+        return cantidadDineroActual >= objetoAComprar.precio;
+    }
 
 }
 

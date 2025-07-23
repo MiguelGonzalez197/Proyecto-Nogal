@@ -91,7 +91,7 @@ public class ModuloSeparacion : Modulo
         if (bolsaActual == null) return;
 
         DatosItem datosItem = bolsaActual.ObtenerDatosItem();
-        if (datosItem.tipoReciclaje != ETipoReciclaje.NoAprovechable)
+        if (!EsBolsaNegra(datosItem))
         {
             Debug.Log("No era necesario abrirla");
         }
@@ -110,7 +110,7 @@ public class ModuloSeparacion : Modulo
         if (bolsaActual == null) return;
 
         DatosItem datosItem = bolsaActual.ObtenerDatosItem();
-        if (datosItem.tipoReciclaje == ETipoReciclaje.NoAprovechable)
+        if (EsBolsaNegra(datosItem))
         {
             Debug.Log("Era una bolsa No aprovechable, no tienes que botarlo completo");
         }
@@ -238,5 +238,10 @@ public class ModuloSeparacion : Modulo
         yield return new WaitForSeconds(1f);
         Destroy(bolsaActual.gameObject);
         SpawnearContenidoBolsa();
+    }
+
+    private bool EsBolsaNegra(DatosItem datosItem)
+    {
+        return datosItem.tipoReciclaje == ETipoReciclaje.NoAprovechable;
     }
 }
