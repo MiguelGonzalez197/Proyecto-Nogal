@@ -71,10 +71,8 @@ MonoBehaviour:
   - {fileID: 6293908239994068782, guid: 732a4884989c6dd4fbf934dfc7b2ceaa, type: 3}
   - {fileID: 4289530654319239740, guid: 616831a7b0f80ec4ba2c06e18e7b651d, type: 3}
   - {fileID: 8010904881565926004, guid: 69f3bc493d211a04baf215340854d419, type: 3}
-  prefabsNoAprovechables:
-  - {fileID: 3908186071195390161, guid: cce22ac7c2a25c643a28bd787f86d3db, type: 3}
-  prefabsOrganicosAprovechables:
-  - {fileID: 3001732584150584289, guid: e5a3a09989414284f82c04b4e23c9f9f, type: 3}
+  prefabsNoAprovechables: []
+  prefabsOrganicosAprovechables: []
 --- !u!205 &5548905312355172363
 LODGroup:
   m_ObjectHideFlags: 0

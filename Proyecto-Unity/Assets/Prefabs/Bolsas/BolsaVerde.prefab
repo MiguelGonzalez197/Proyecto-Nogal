@@ -59,13 +59,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  prefabsAprovechables:
-  - {fileID: 657988998513500765, guid: 7854750d3668d64498265773a94b34c6, type: 3}
-  - {fileID: 6650426121929096099, guid: b3137f77dfc25b248a11df65b5948c1e, type: 3}
-  - {fileID: 2989698565783395876, guid: e90058bdffd1ab0438ea6c597260064c, type: 3}
-  prefabsNoAprovechables:
-  - {fileID: 3908186071195390161, guid: cce22ac7c2a25c643a28bd787f86d3db, type: 3}
-  - {fileID: 625242516236402489, guid: 6d8d1e9233c5e8240974072f3ce5e46b, type: 3}
+  prefabsAprovechables: []
+  prefabsNoAprovechables: []
   prefabsOrganicosAprovechables:
   - {fileID: 8890508618791391049, guid: 46c5ecceb1bf21d40882aa046cf6ec7f, type: 3}
   - {fileID: 1562450511784550434, guid: 19dbff72e5e39e341be37df276cfb25c, type: 3}
