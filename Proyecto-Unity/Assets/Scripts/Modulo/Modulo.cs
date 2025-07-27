@@ -61,7 +61,7 @@ public class Modulo : MonoBehaviour , IInteractuable
     }
 
     /** Callback Boton */
-    public void SalirModuloCallback()
+    public virtual void SalirModuloCallback()
     {
         gameManager.RestaurarCamara();
         ActivarCanva(false);

@@ -21,6 +21,7 @@ public class Bolsa : Item
     {
         base.Start();
         rigidbodyItem.useGravity = false;
+        bPuedeRotar = false;
         CrearContenido();
     }
 

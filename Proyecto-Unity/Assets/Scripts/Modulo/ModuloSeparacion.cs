@@ -98,8 +98,7 @@ public class ModuloSeparacion : Modulo
 
         prefabsResiduosBolsa = bolsaActual.ObtenerContenido();
         StartCoroutine(DestruirBolsa());
-        ActivarBotonMoverCamara(true);
-        ActivarBotonesMesa(false);
+        
     }
 
     /// <summary>
@@ -238,6 +237,8 @@ public class ModuloSeparacion : Modulo
         yield return new WaitForSeconds(1f);
         Destroy(bolsaActual.gameObject);
         SpawnearContenidoBolsa();
+        ActivarBotonMoverCamara(true);
+        ActivarBotonesMesa(false);
     }
 
     private bool EsBolsaNegra(DatosItem datosItem)

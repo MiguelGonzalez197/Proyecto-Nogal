@@ -4,24 +4,17 @@ using UnityEngine;
 public class Residuo : Item
 {
 
-    [SerializeField]
-    private float velocidadRotacion;
-
-    private Vector3 rotacion;
-    private Vector3 nuevaRotacion;
-
     protected override void Start()
     {
         base.Start();
+        bPuedeRotar = true;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        rotacion = new Vector3(0f, velocidadRotacion * Time.deltaTime, 0f);
-        nuevaRotacion = transform.eulerAngles + rotacion;
-        transform.eulerAngles = nuevaRotacion;
 
+        base.Update();
     }
 
 

@@ -9,6 +9,16 @@ public struct DatosItem
 }
 
 [System.Serializable]
+public class ObjetoCrafteable
+{
+    public GameObject objetoACraftear;
+    public Button botonObjeto;
+    public int aprovechablesNecesarios;
+    public int organicosAprovechablesNecesarios;
+    public Sprite imagenCrafteable;
+}
+
+[System.Serializable]
 public class ObjetoComprable
 {
     public GameObject objetoAVenta;
@@ -16,12 +26,3 @@ public class ObjetoComprable
     public int precio;
 }
 
-[System.Serializable]
-public class ObjetoCrafteable
-{
-    public GameObject objetoACraftear;
-    public Button botonObjeto;
-    public int aprovechablesNecesarios;
-    public int noAprovechablesNecesarios;
-    public int organicosAprovechablesNecesarios;
-}

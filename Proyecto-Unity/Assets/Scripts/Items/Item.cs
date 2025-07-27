@@ -7,12 +7,27 @@ public class Item : MonoBehaviour , IItem
 
     [SerializeField]
     protected DatosItem datosItem;
+    [SerializeField]
+    protected bool bPuedeRotar;
+    [SerializeField]
+    private float velocidadRotacion;
 
     protected Rigidbody rigidbodyItem;
+
+    private Vector3 rotacion;
+    private Vector3 nuevaRotacion;
 
     protected virtual void Start()
     {
         rigidbodyItem = GetComponent<Rigidbody>();
+    }
+
+    protected virtual void Update()
+    {
+        if (!bPuedeRotar) return;
+        rotacion = new Vector3(0f, velocidadRotacion * Time.deltaTime, 0f);
+        nuevaRotacion = transform.eulerAngles + rotacion;
+        transform.eulerAngles = nuevaRotacion;
     }
 
     private void OnDestroy()

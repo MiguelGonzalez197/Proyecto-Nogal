@@ -20,6 +20,8 @@ public class Inventario : MonoBehaviour
     List<DatosItem> organicosAprovechables = new List<DatosItem>();
 
     public int ObtenerDinero() { return dinero; }
+    public int ObtenerAprovechables() { return aprovechables.Count; }
+    public int ObtenerOrganicos() { return aprovechables.Count; }
 
     public void AgregarItemInventario(DatosItem datosItem)
     {
@@ -54,4 +56,23 @@ public class Inventario : MonoBehaviour
         dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
     }
+
+    public void DisminuirAprovechables(int cantidad)
+    {
+        if (aprovechables.Count < 0) return;
+        for(int i = 0; i<cantidad; i++)
+        {
+            aprovechables.Remove(aprovechables[aprovechables.Count - 1]);
+        }
+    }
+
+    public void DisminuirOrganicosAprovechables(int cantidad)
+    {
+        if (aprovechables.Count < 0) return;
+        for (int i = 0; i < cantidad; i++)
+        {
+            organicosAprovechables.Remove(organicosAprovechables[organicosAprovechables.Count - 1]);
+        }
+    }
+
 }

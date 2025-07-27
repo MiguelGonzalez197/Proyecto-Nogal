@@ -36,6 +36,13 @@ public class ModuloCompra : Modulo
     public void EstablecerDecoracionesDisponibles(List<ObjetoComprable> lista) { decoracionesDisponibles = lista; }
     public void EstablecerModulosDisponibles(List<ObjetoComprable> lista) { modulosDisponibles = lista; }
 
+
+    public override void SalirModuloCallback()
+    {
+        base.SalirModuloCallback();
+    }
+
+
     /* Callback boton */
     public void ComprarObjeto(Button botonOprimido, List<ObjetoComprable> listaAsociada)
     {
