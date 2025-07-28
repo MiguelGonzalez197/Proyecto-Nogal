@@ -1,22 +1,33 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Item : MonoBehaviour , IItem
 {
-    public event System.Action EnItemDestruido;
 
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
     [SerializeField]
     protected DatosItem datosItem;
     [SerializeField]
     protected bool bPuedeRotar;
     [SerializeField]
     private float velocidadRotacion;
+    
+    /** <Eventos> */
+    public event System.Action EnItemDestruido;
+    /** </Eventos> */
 
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
     protected Rigidbody rigidbodyItem;
-
     private Vector3 rotacion;
     private Vector3 nuevaRotacion;
 
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
     protected virtual void Start()
     {
         rigidbodyItem = GetComponent<Rigidbody>();
@@ -24,11 +35,10 @@ public class Item : MonoBehaviour , IItem
 
     protected virtual void Update()
     {
-        if (!bPuedeRotar) return;
-        rotacion = new Vector3(0f, velocidadRotacion * Time.deltaTime, 0f);
-        nuevaRotacion = transform.eulerAngles + rotacion;
-        transform.eulerAngles = nuevaRotacion;
+        ProcesarRotacionItem();
     }
+
+
 
     private void OnDestroy()
     {
@@ -38,7 +48,13 @@ public class Item : MonoBehaviour , IItem
         }
     }
 
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PÚBLICOS
+    // ───────────────────────────────────────
+
+    /** <Getters> */
     public DatosItem ObtenerDatosItem() { return datosItem; }
+    /** </Getters> */
 
     public virtual void MoverHaciaPosicion(Transform posicion, float duracion)
     {
@@ -52,6 +68,17 @@ public class Item : MonoBehaviour , IItem
             rigidbodyItem.useGravity = true;
             StartCoroutine(DestruirItem());
         }
+    }
+
+    // ───────────────────────────────────────
+    // 5. MÉTODOS PRIVADOS
+    // ───────────────────────────────────────
+    private void ProcesarRotacionItem()
+    {
+        if (!bPuedeRotar) return;
+        rotacion = new Vector3(0f, velocidadRotacion * Time.deltaTime, 0f);
+        nuevaRotacion = transform.eulerAngles + rotacion;
+        transform.eulerAngles = nuevaRotacion;
     }
 
     private IEnumerator InterpolarPosicion(Transform posicion, float duracion)

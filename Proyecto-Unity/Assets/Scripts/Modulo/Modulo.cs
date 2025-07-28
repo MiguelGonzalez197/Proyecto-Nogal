@@ -72,6 +72,9 @@ public class Modulo : MonoBehaviour , IInteractuable
     // 5. MÉTODOS PROTEGIDOS
     // ───────────────────────────────────────
 
+    /// <summary>
+    /// Permite activar el UI relacionado a cada modulo
+    /// </summary>
     protected void ActivarCanva(bool bActivar)
     {
         if(canvaModulo != null)

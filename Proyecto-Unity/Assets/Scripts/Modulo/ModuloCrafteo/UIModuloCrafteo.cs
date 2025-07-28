@@ -1,23 +1,31 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIModuloCrafteo : MonoBehaviour
 {
-    private ModuloCrafteo moduloCrafteo;
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
 
     [Header("Referencias UI Modulo Compra")]
     [SerializeField]
-    private GameObject ContenedorCrafteables;
-
+    private GameObject ContenedorCrafteables;                                                       // Zona donde se van a generar los botones de los objetos que se van a craftear
 
     [Header("Prefabs UI Modulo Compra")]
     [SerializeField]
     private GameObject prefabBoton;
 
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
     private List<ObjetoCrafteable> crafteablesDisponibles = new List<ObjetoCrafteable>();
+    private ModuloCrafteo moduloCrafteo;
 
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
     void Start()
     {
         moduloCrafteo = GetComponent<ModuloCrafteo>();
@@ -26,7 +34,9 @@ public class UIModuloCrafteo : MonoBehaviour
         EstablecerListas();
     }
 
-
+    // ───────────────────────────────────────
+    // 5. MÉTODOS PRIVADOS
+    // ───────────────────────────────────────
     private void ObtenerListas()
     {
         if (moduloCrafteo == null) return;
@@ -71,7 +81,7 @@ public class UIModuloCrafteo : MonoBehaviour
     {
         for (int i = 0; i < lista.Count; i++)
         {
-            int indexCapturado = i; // Captura el �ndice en una variable local (clave para evitar bugs de cierre)
+            int indexCapturado = i; // Captura el índice en una variable local (clave para evitar bugs de cierre)
             AsignarCallbackCompra(lista, i, indexCapturado);
         }
 

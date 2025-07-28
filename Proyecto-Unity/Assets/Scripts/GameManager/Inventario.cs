@@ -1,27 +1,37 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class Inventario : MonoBehaviour
 {
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
     [Header("Economia")]
     [SerializeField]
-    private int dinero = 10000;
+    private int dinero = 10000;                                             // Cantidad de dinero obtenida
     [SerializeField]
-    private int ganancias = 2000;
+    private int ganancias = 2000;                                           
     [SerializeField]
     private int perdidasPenitencias = 4000;
 
     [Header("Residuos recolectados")]
     [SerializeField]
-    List<DatosItem> aprovechables = new List<DatosItem>();
+    List<DatosItem> aprovechables = new List<DatosItem>();             
     [SerializeField]
-    List<DatosItem> noAprovechables = new List<DatosItem>();
+    List<DatosItem> noAprovechables = new List<DatosItem>();          
     [SerializeField]
     List<DatosItem> organicosAprovechables = new List<DatosItem>();
 
+
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PÚBLICOS
+    // ───────────────────────────────────────
+
+    /** <Getters> */
     public int ObtenerDinero() { return dinero; }
     public int ObtenerAprovechables() { return aprovechables.Count; }
     public int ObtenerOrganicos() { return aprovechables.Count; }
+    /** </Getters> */
 
     public void AgregarItemInventario(DatosItem datosItem)
     {
@@ -51,7 +61,7 @@ public class Inventario : MonoBehaviour
         dinero = Mathf.Clamp(dinero, 0, 100000);
     }
 
-    public void DisminuirDineroCompra(int cantidad)
+    public void DisminuirDinero(int cantidad)
     {
         dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
@@ -74,5 +84,6 @@ public class Inventario : MonoBehaviour
             organicosAprovechables.Remove(organicosAprovechables[organicosAprovechables.Count - 1]);
         }
     }
+
 
 }

@@ -1,24 +1,38 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class AnimacionesRecicladora : MonoBehaviour
 {
+
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
     [SerializeField]
-    private float intervalosAnimaciones = 10f;
+    private float intervalosAnimaciones = 10f;              // Intervalos de tiempo en los que la recicladora debe realizar una animacion
 
     [Header("Lista Animaciones")]
     [SerializeField]
-    List<string> animaciones = new List<string>();
+    List<string> animaciones = new List<string>();         // Lista de animaciones disponibles agregadas en el inspector
 
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
     private Animator animatorRecicladora;
-    string animacionActual;
+    private string animacionActual;                       
 
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
     void Start()
     {
         animatorRecicladora = GetComponent<Animator>();
         StartCoroutine(IniciarAnimacion("Saludando",0.5f));
     }
+
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PÚBLICOS
+    // ───────────────────────────────────────
 
     //Animation event
     public void VolverAInactiva()
@@ -45,6 +59,9 @@ public class AnimacionesRecicladora : MonoBehaviour
         IniciarAnimacionModulo("GestoNo");
     }
 
+    // ───────────────────────────────────────
+    // 5. MÉTODOS PRIVADOS
+    // ───────────────────────────────────────
     private void IniciarAnimacionModulo(string animacion)
     {
         StopCoroutine(IniciarAnimacion(animacionActual, intervalosAnimaciones));

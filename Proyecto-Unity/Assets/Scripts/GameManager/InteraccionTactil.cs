@@ -1,24 +1,34 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InteraccionTactil : MonoBehaviour
 {
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
     [Header("Valores")]
-    [SerializeField] 
-    float maxDistanciaTap = 10f;  // en p�xeles
-    [SerializeField] 
-    float maxDuracionTap = 0.3f;  // en segundos
+    [SerializeField]
+    float maxDistanciaTap = 10f;  // En píxeles cual es la cantidad maxima para mover la pantalla y contar como tap
+    [SerializeField]
+    float maxDuracionTap = 0.3f;  // En segundos cual es el maximo que debe durar la interacion con la pantallar para contar como tap
 
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
     private Vector2 posicionInicioToque;
     private float tiempoInicioToque;
 
-    
-
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
     void Update()
     {
         InteraccionTactilMovil();
         InteraccionTactilPC();
     }
 
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PRIVADOS
+    // ───────────────────────────────────────
     private void InteraccionTactilMovil()
     {
         if (Input.touchCount == 1)
@@ -36,7 +46,7 @@ public class InteraccionTactil : MonoBehaviour
                 float duracion = Time.time - tiempoInicioToque;
                 float distancia = Vector2.Distance(toque.position, posicionInicioToque);
 
-                if (duracion < maxDuracionTap && distancia < maxDistanciaTap)
+                if (PuedeRealizarInteraccion(duracion, distancia))
                 {
                     ProcesarRaycast(toque.position);
                 }
@@ -57,7 +67,7 @@ public class InteraccionTactil : MonoBehaviour
             float duracion = Time.time - tiempoInicioToque;
             float distancia = Vector2.Distance(Input.mousePosition, posicionInicioToque);
 
-            if (duracion < maxDuracionTap && distancia < maxDistanciaTap)
+            if (PuedeRealizarInteraccion(duracion, distancia))
             {
                 ProcesarRaycast(Input.mousePosition);
             }
@@ -76,5 +86,10 @@ public class InteraccionTactil : MonoBehaviour
                 interactuable.Interactuar();
             }
         }
+    }
+
+    private bool PuedeRealizarInteraccion(float duracion, float distancia)
+    {
+        return duracion < maxDuracionTap && distancia < maxDistanciaTap;
     }
 }
