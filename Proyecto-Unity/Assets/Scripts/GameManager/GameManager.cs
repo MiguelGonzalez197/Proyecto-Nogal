@@ -1,34 +1,46 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+    // ───────────────────────────────────────
+    // 1. REFERENCIAS SERIALIZADAS
+    // ───────────────────────────────────────
     [Header("Referencias")]
     [SerializeField]
-    private Transform camara;                   // Referencia Camara
+    private Transform camara;
 
-    private CamaraOrbital camaraOrbital;        // Referencia script CamaraOrbital
+    // ───────────────────────────────────────
+    // 2. CAMPOS PRIVADOS INTERNOS
+    // ───────────────────────────────────────
+    private CamaraOrbital camaraOrbital;        
     private Vector3 ultimaPosicionCamara;       // Registro ultima posicion de la camara antes de mover a punto fijo
     private Quaternion ultimaRotacionCamara;    // Registro ultima rotacion de la camara antes de mover a punto fijo
 
+    // ───────────────────────────────────────
+    // 3. MÉTODOS UNITY
+    // ───────────────────────────────────────
     void Start()
     {
+        //Application.targetFrameRate = 60;
         camaraOrbital = GetComponentInChildren<CamaraOrbital>();
         // mensajje de prueba
-        GestorCajaTexto.Instancia.MostrarMensaje("�Prueba exitosa!", 2f);
+        //GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
     }
 
-    void Update()
-    {
-        InteraccionTactilMovil();
-        InteraccionTactilPC();
-    }
+    // ───────────────────────────────────────
+    // 4. MÉTODOS PÚBLICOS
+    // ───────────────────────────────────────
 
+    /// <summary>
+    /// Mueve de forma inmediata a un punto fijo
+    /// </summary>
     public void MoverACamaraFija(Transform Destino)
     {
         if(camaraOrbital != null)
         {
-            Debug.Log("Moviendo");
             ultimaPosicionCamara = camara.position;
             ultimaRotacionCamara = camara.rotation;
 
@@ -40,10 +52,14 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public IEnumerator RotarCamara(Quaternion valor, float duracion)
+    /// <summary>
+    /// Interpola la posicion y rotacion de la camara a la transformada dada
+    /// </summary>
+    public IEnumerator MoverCamara(Transform valorPosicion, float duracion)
     {
         float tiempo = 0f;
 
+        Vector3 inicioPos = camara.position;
         Quaternion inicioRot = camara.rotation;
 
         while (tiempo < duracion)
@@ -51,14 +67,19 @@ public class GameManager : MonoBehaviour
             tiempo += Time.deltaTime;
             float t = tiempo / duracion;
 
-            camara.rotation = Quaternion.Slerp(inicioRot, valor, t);
+            camara.position = Vector3.Lerp(inicioPos, valorPosicion.position, t);
+            camara.rotation = Quaternion.Slerp(inicioRot, valorPosicion.rotation, t);
 
             yield return null;
         }
 
-        camara.rotation = valor;
+        camara.position = valorPosicion.position;
+        camara.rotation = valorPosicion.rotation;
     }
 
+    /// <summary>
+    /// Permite que la camara vuelva a su posicion original y permite rotar alrededor de la sala
+    /// </summary>
     public void RestaurarCamara()
     {
         camara.position = ultimaPosicionCamara;
@@ -67,34 +88,5 @@ public class GameManager : MonoBehaviour
         camaraOrbital.enabled = true;
     }
 
-    private void InteraccionTactilPC()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray rayo = Camera.main.ScreenPointToRay(Input.mousePosition);
-            ProcesarRaycast(rayo);
-        }
-    }
-
-    private void InteraccionTactilMovil()
-    {
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
-        {
-            Ray rayo = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            ProcesarRaycast(rayo);
-        }
-    }
-
-    private void ProcesarRaycast(Ray rayo)
-    {
-        if (Physics.Raycast(rayo, out RaycastHit impacto))
-        {
-            // Busca un componente que implemente la interfaz IInteractuable
-            var interactuable = impacto.collider.GetComponent<IInteractuable>();
-            if (interactuable != null)
-            {
-                interactuable.Interactuar();
-            }
-        }
-    }
+    
 }
