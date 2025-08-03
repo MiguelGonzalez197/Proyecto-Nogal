@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 4133810503099143696}
   - component: {fileID: -1713031133841390871}
   m_Layer: 3
-  m_Name: Crowbar
-  m_TagString: Untagged
+  m_Name: Palanca de Metal
+  m_TagString: aprovechable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   datosItem:
     tipoItem: 1
     tipoReciclaje: 0
+  bPuedeRotar: 0
   velocidadRotacion: 90
 --- !u!54 &4133810503099143696
 Rigidbody:

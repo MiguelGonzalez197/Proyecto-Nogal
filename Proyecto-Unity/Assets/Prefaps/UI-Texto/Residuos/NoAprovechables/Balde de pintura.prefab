@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbe23a43f063c51469d5e83d6bd77515, type: 3}
+      propertyPath: m_TagString
+      value: noAprovechable
+      objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: cbe23a43f063c51469d5e83d6bd77515, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -114,6 +118,7 @@ MonoBehaviour:
   datosItem:
     tipoItem: 1
     tipoReciclaje: 1
+  bPuedeRotar: 0
   velocidadRotacion: 90
 --- !u!54 &4358405462340949550
 Rigidbody:

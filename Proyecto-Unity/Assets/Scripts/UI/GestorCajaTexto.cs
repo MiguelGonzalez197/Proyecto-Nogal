@@ -18,9 +18,7 @@ public class GestorCajaTexto : MonoBehaviour
             Destroy(gameObject);
     }
 
-    /// <summary>
-    /// API global para mostrar un mensaje.
-    /// </summary>
+   
     public void MostrarMensaje(string mensaje, float? duracion = null)
     {
         GameObject go = Instantiate(prefabCajaTexto, contenedorCanvas, worldPositionStays: false);

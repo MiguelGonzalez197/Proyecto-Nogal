@@ -22,9 +22,7 @@ public class CajaTextoReutilizable : MonoBehaviour
         OcultarInstantaneo();
     }
 
-    /// <summary>
-    /// Muestra el recuadro con el texto dado.
-    /// </summary>
+    
     public void Mostrar(string mensaje)
     {
         mensajeTMP.text = mensaje;

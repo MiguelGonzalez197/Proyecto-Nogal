@@ -13,13 +13,14 @@ public class ModuloSeparacion : Modulo
     [Header("Referencias Modulo Separacion")]
     [SerializeField]
     private List<GameObject> botonesCanva = new List<GameObject>();
+   
 
     [Header("Prefabs Modulo Separacion")]
     [SerializeField]
     private List<Bolsa> prefabsBolsas = new List<Bolsa>();                          
 
     [Header("Valores Modulo Separacion")]
-    [Range(1,5)]
+    [Range(1,8)]
     [SerializeField]
     private int numeroBolsasDisponibles = 3;                                        // Establece un limite de bolsas por cada vez que se interactua con el modulo
 
@@ -30,6 +31,7 @@ public class ModuloSeparacion : Modulo
     private List<GameObject> prefabsResiduosBolsa = new List<GameObject>();         // Copia de los prefabs generados por la bolsa
     private List<Vector3> spawnsContenido = new List<Vector3>();                    // Lista de posiciones para cada contenido de las bolsas
     private Queue<GameObject> referenciasResiduosBolsa = new Queue<GameObject>();   // Fila FIFO con referencias de los items generados
+
 
     private Bolsa bolsaActual;                                                      // Referencia al componente de la bolsa generada
     private GameObject itemActual;                                                  // Referencia al item con el que se esta tratando
@@ -172,6 +174,7 @@ public class ModuloSeparacion : Modulo
         for (int i = 0; i < cantidad; i++)
         {
             GameObject instancia = Instantiate(prefabsResiduosBolsa[i], spawnsContenido[i], Quaternion.identity);
+            
             RegistrarEnFilaReferenciaResiduosBolsa(instancia);
             SuscribirItemADestruccion(instancia);
         }
@@ -181,11 +184,17 @@ public class ModuloSeparacion : Modulo
     {
         if(referenciasResiduosBolsa.Count > 0)
         {
+            
             itemActual = referenciasResiduosBolsa.Dequeue();
+
+         
+            TutorialReciclaje.MostrarMensajeResiduo(itemActual);
+            
             ObtenerInterfaceItem(itemActual);
             if (interfaceItemActual != null)
             {
                 interfaceItemActual.MoverHaciaPosicion(posicionesItems[1], duracionMovimientoCamara);
+
             }
         }
         else
