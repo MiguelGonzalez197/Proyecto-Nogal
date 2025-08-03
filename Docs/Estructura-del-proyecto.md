@@ -18,7 +18,7 @@ Este documento describe la estructura y organización del proyecto para facilita
 
 ## Arquitectura
 
-(Consulta el archivo [`Arquitectura.md`](./Arquitectura.md) para una descripción detallada del diseño del proyecto.)
+Consulta el archivo [`Arquitectura.md`](./Arquitectura.md) para una descripción detallada del diseño del proyecto.
 
 ---
 
