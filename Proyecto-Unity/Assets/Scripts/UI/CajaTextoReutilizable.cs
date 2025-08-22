@@ -46,7 +46,10 @@ public class CajaTextoReutilizable : MonoBehaviour
     /// </summary>
     public void Ocultar()
     {
+        if (rutinaOcultar != null)
+            StopCoroutine(rutinaOcultar);
         OcultarInstantaneo();
+        Destroy(gameObject);
     }
 
     private void MostrarInstantaneo()

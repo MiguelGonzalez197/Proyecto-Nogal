@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5743920815648096247}
   m_Layer: 3
   m_Name: Martillo de Metal
-  m_TagString: Aprovechable
+  m_TagString: aprovechable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

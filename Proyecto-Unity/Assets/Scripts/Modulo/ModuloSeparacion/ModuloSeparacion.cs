@@ -22,7 +22,7 @@ public class ModuloSeparacion : Modulo
     [Header("Valores Modulo Separacion")]
     [Range(1,8)]
     [SerializeField]
-    private int numeroBolsasDisponibles = 3;                                        // Establece un limite de bolsas por cada vez que se interactua con el modulo
+    private int numeroBolsasDisponibles = 4;                                        // Establece un limite de bolsas por cada vez que se interactua con el modulo
 
     // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
@@ -38,6 +38,7 @@ public class ModuloSeparacion : Modulo
     private IItem interfaceItemActual;                                              // Interface del item actual
     private int bolsasHechas = 0;                                                   // Contador de cada bolsa realizada
     private bool bEstaLaCamaraALaIzquierda = true;                                  // Booleano que permite saber si la camara esta en la posicion 1 o la posicion 2
+    public bool HaClasificadoTodasLasBolsas => bolsasHechas >= numeroBolsasDisponibles;
 
     // ───────────────────────────────────────
     // 3. MÉTODOS UNITY
@@ -96,6 +97,7 @@ public class ModuloSeparacion : Modulo
         if (!EsBolsaNegra(datosItem))
         {
             Debug.Log("No era necesario abrirla");
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Esa bolsa no necesitaba abrirse");
         }
 
         prefabsResiduosBolsa = bolsaActual.ObtenerContenido();
@@ -199,6 +201,7 @@ public class ModuloSeparacion : Modulo
         }
         else
         {
+            TutorialReciclaje.DesactivarInteracciones();
             bolsasHechas++;
             MoverCamara();
             SpawnearBolsa();
@@ -226,10 +229,13 @@ public class ModuloSeparacion : Modulo
 
     private void ActivarBotonesMesa(bool bActivar)
     {
-        if(botonesCanva.Count > 1)
+        if (botonesCanva.Count > 1)
         {
-            botonesCanva[0].SetActive(bActivar);     // Boton abrir bolsa
-            botonesCanva[1].SetActive(bActivar);     // Boton botar bolsa
+            if (botonesCanva[0] != null)
+                botonesCanva[0].SetActive(bActivar);     // Boton abrir bolsa
+
+            if (botonesCanva[1] != null)
+                botonesCanva[1].SetActive(bActivar);     // Boton botar bolsa
         }
     }
 
@@ -237,7 +243,8 @@ public class ModuloSeparacion : Modulo
     {
         if (botonesCanva.Count > 2)
         {
-            botonesCanva[2].SetActive(bActivar);
+            if (botonesCanva[2] != null)
+                botonesCanva[2].SetActive(bActivar);
         }
     }
 

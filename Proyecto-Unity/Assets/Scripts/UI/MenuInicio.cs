@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuInicio : MonoBehaviour
 {
     [Header("Configuracion")]
-    [SerializeField] private string escenaJuego = "SampleScene";
+    [SerializeField] private string escenaJuego = "TutorialReciclaje";
     [SerializeField] private GameObject panelAjustes;
 
     void Start()

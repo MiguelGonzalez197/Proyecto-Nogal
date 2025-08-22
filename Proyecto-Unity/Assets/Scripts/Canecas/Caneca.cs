@@ -46,6 +46,7 @@ public class Caneca : MonoBehaviour
             itemsProcesados.Add(itemActual);
             gestorInventario.DisminuirDineroError();
             Debug.Log("Este item no pertenece a esta caneca");
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Ese residuo iba en otra caneca");
             return;
         } 
             
@@ -104,6 +105,7 @@ public class Caneca : MonoBehaviour
         {
             gestorInventario.AgregarItemInventario(datosItem);
             gestorInventario.AgregarDinero();
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Clasificado correctamente");
         }
     }
 

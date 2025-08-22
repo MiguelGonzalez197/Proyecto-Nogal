@@ -8,7 +8,13 @@ public class GestorCajaTexto : MonoBehaviour
     [SerializeField]
     private GameObject prefabCajaTexto;    // prefab con CajaTextoReutilizable
     [SerializeField]
-    private Transform contenedorCanvas;    
+    private Transform contenedorCanvas;
+
+    [Header("Prefab mensajes de clasificacion")]
+    [SerializeField]
+    private GameObject prefabCajaClasificacion;   // prefab anclado a la derecha
+    [SerializeField]
+    private Transform contenedorClasificacion;    // contenedor lateral
 
     void Awake()
     {
@@ -27,4 +33,23 @@ public class GestorCajaTexto : MonoBehaviour
             caja.tiempoCierreAutomatico = duracion.Value;
         caja.Mostrar(mensaje);
     }
+
+    /// <summary>
+    /// Mensajes que aparecen en el costado derecho al clasificar items.
+    /// </summary>
+    public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
+    {
+        if (prefabCajaClasificacion == null || contenedorClasificacion == null)
+        {
+            MostrarMensaje(mensaje, duracion);
+            return;
+        }
+
+        GameObject go = Instantiate(prefabCajaClasificacion, contenedorClasificacion, false);
+        CajaTextoReutilizable caja = go.GetComponent<CajaTextoReutilizable>();
+        if (duracion.HasValue)
+            caja.tiempoCierreAutomatico = duracion.Value;
+        caja.Mostrar(mensaje);
+    }
 }
+

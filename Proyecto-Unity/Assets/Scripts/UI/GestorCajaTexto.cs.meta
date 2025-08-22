@@ -1,2 +1,15 @@
 fileFormatVersion: 2
 guid: 1aa4a13156a7c344d9da6a152b9c32f8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - prefabCajaTexto: {instanceID: 0}
+  - contenedorCanvas: {instanceID: 0}
+  - prefabCajaClasificacion: {instanceID: 0}
+  - contenedorClasificacion: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         camaraOrbital = GetComponentInChildren<CamaraOrbital>();
         // mensajje de prueba
         //GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
+        GenerarRotulosModulos();
     }
 
     // ───────────────────────────────────────
@@ -76,7 +78,18 @@ public class GameManager : MonoBehaviour
         camara.position = valorPosicion.position;
         camara.rotation = valorPosicion.rotation;
     }
-
+    /// <summary>
+    /// Bloquea la cámara sin moverla, guardando su última posición.
+    /// </summary>
+    public void BloquearCamara()
+    {
+        if (camaraOrbital != null)
+        {
+            ultimaPosicionCamara = camara.position;
+            ultimaRotacionCamara = camara.rotation;
+            camaraOrbital.enabled = false;
+        }
+    }
     /// <summary>
     /// Permite que la camara vuelva a su posicion original y permite rotar alrededor de la sala
     /// </summary>
@@ -87,6 +100,55 @@ public class GameManager : MonoBehaviour
 
         camaraOrbital.enabled = true;
     }
+    /// <summary>
+    /// Activa el control orbital sin modificar la posición actual de la cámara.
+    /// </summary>
+    public void DesbloquearCamara()
+    {
+        if (camaraOrbital != null)
+        {
+            camaraOrbital.enabled = true;
+        }
+    }
+    // ───────────────────────────────────────
+    // 5. TEXTO FLOTANTE DE MODULOS
+    // ───────────────────────────────────────
+    private void GenerarRotulosModulos()
+    {
+        CrearRotulo<ModuloSeparacion>("Módulo de separación", Color.white);
+        CrearRotulo<ModuloCompra>("Módulo de compra", Color.white);
+        CrearRotulo<ModuloCrafteo>("Módulo de crafteo", Color.gray, bloquear: true);
+    }
 
-    
+    private void CrearRotulo<T>(string texto, Color color, bool bloquear = false) where T : MonoBehaviour
+    {
+        T modulo = FindObjectOfType<T>();
+        if (modulo == null) return;
+
+        GameObject rotulo = new GameObject("RotuloModulo");
+        rotulo.transform.SetParent(modulo.transform, false);
+        rotulo.transform.localPosition = new Vector3(0f, 1.2f, 0f);
+
+        TextMeshPro tm = rotulo.AddComponent<TextMeshPro>();
+        tm.text = texto;
+        tm.color = color;
+        tm.alignment = TextAlignmentOptions.Center;
+        tm.fontSize = 2f;
+
+        rotulo.AddComponent<FaceCamera>();
+
+        if (bloquear)
+        {
+            BoxCollider col = modulo.GetComponent<BoxCollider>();
+            if (col != null) col.enabled = false;
+
+            foreach (Renderer r in modulo.GetComponentsInChildren<Renderer>())
+            {
+                foreach (Material m in r.materials)
+                {
+                    m.color = Color.gray;
+                }
+            }
+        }
+    }
 }

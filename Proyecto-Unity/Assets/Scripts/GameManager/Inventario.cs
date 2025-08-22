@@ -66,7 +66,10 @@ public class Inventario : MonoBehaviour
         dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
     }
-
+    public void AsegurarDinero(int cantidadMinima)
+    {
+        dinero = Mathf.Max(dinero, cantidadMinima);
+    }
     public void DisminuirAprovechables(int cantidad)
     {
         if (aprovechables.Count < 0) return;
