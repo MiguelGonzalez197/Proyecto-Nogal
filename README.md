@@ -3,12 +3,20 @@
 > EcoMisión es un videojuego desarrollado en Unity donde el jugador aprende a clasificar residuos sólidos mediante minijuegos interactivos. Su objetivo es fomentar la conciencia ambiental usando mecánicas lúdicas de reciclaje en diferentes zonas de trabajo.
 
 ---
+## 🌐 Página Web
+
+El link explicativo de este videojuego es:  
+👉 [Visitar la página web del proyecto](https://tu-enlace-aqui.com)
+
+Consulte la página para mayor información sobre el desarrollo de este proyecto.
+
+---
 
 ## 🎮 Características
 
 - ✅ Mecánica de **clasificación manual de residuos**: el jugador selecciona ítems y los lanza a la caneca correspondiente.
 - 🧠 Lógica del juego basada en **evaluación automática de aciertos y errores**, con retroalimentación visual y sonora.
-- 🌎 Niveles generados **aleatoriamente** con bolsas de basura de distintos niveles de rareza y dificultad.
+- 🌎 Niveles generados **aleatoriamente** con bolsas dCe basura de distintos niveles de rareza y dificultad.
 - 🔊 Efectos de sonido, música ambiental y posibilidad de activar/desactivar según preferencia del jugador.
 - 🎯 Compatible con **teclado y mouse** para escritorio, y diseñado también para dispositivos móviles Android 9+.
 
@@ -17,8 +25,6 @@
 ## 📚 Funcionalidades educativas
 
 - 🧾 Textos interactivos que enseñan la correcta separación de residuos.
-- 🆘 Botón de ayuda disponible en cualquier momento con guías por tipo y color de residuo.
-- 🗣️ Soporte multilenguaje (Español / Inglés).
 
 ---
 

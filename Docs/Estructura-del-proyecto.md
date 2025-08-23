@@ -26,6 +26,9 @@ Consulta el archivo [`Arquitectura.md`](./Arquitectura.md) para una descripción
 
 ### Motor Grafico/
 
+Para este videojuego utilizamos el motor grafico **Unity 6**
+![Unity Logo](./imgs/UnityLogo.jpeg)
+
 ### Lenguajes/
 
 Usamos exclusivamente **C#** para toda la lógica del juego en Unity.
@@ -49,22 +52,25 @@ Contiene todas las carpetas necesarias para abrir y ejecutar el proyecto correct
 
 ```text
 Assets/                  # Código fuente, escenas, prefabs, materiales, modelos, sonidos, animaciones, etc.
-├── Editor/              # Scripts personalizados para herramientas del editor
-├── Settings/            # Configuraciones personalizadas (puede incluir sistemas de entrada o settings de paquetes)
-├── Audio/               # Efectos de sonido y música
-├── Materials/           # Materiales organizados
-├── Prefabs/             # Objetos preconfigurados del juego
-├── Scenes/              # Escenas del juego
-├── Scripts/             # Código fuente organizado por funcionalidad
-│   ├── Player/          # Lógica del jugador
-│   ├── Enums/           # Enumeraciones globales del juego
-│   ├── UI/              # Scripts para la interfaz de usuario
-│   ├── Systems/         # Controladores generales (GameManager, InputManager, etc.)
-│   └── Interfaces/      # Interfaces para desacoplar sistemas (IPuzzle, IInteractable, etc.)
-├── Animations/          # Controladores Animator y animaciones
-├── UI/                  # Canvases, botones, íconos, fuentes
-├── FX/                  # Partículas, efectos visuales y shaders
-└── Resources/           # Assets cargados dinámicamente por scripts (usa con moderación)
+├── Adaptive Performance/ # Configuraciones para optimización de rendimiento (mobile/VR)
+├── Audio/                # Efectos de sonido y música
+├── Editor/               # Scripts personalizados para herramientas del editor
+├── Prefabs/              # Objetos preconfigurados del juego
+├── Recursos/             # Assets cargados dinámicamente por scripts
+├── Scenes/               # Escenas del juego
+├── Scripts/              # Código fuente organizado por funcionalidad
+│   ├── Camara/           # Control de la cámara y su comportamiento (movimiento, seguimiento)
+│   ├── Caneca/           # Lógica asociada a las canecas de reciclaje (detección, validación, interacción)
+│   ├── Enums/            # Enumeraciones globales del juego
+│   ├── Estructuras/      # Clases de datos o estructuras auxiliares
+│   ├── GameManager/      # Controlador general (gestión de estados, referencias globales)
+│   ├── Interfaces/       # Interfaces para desacoplar sistemas (IItem, IInteractuable, etc.)
+│   ├── Items/            # Lógica y definiciones de los objetos recolectables o interactuables
+│   ├── Modulo/           # Módulos específicos del juego (ej: ModuloSeparacion, ModuloCompra, ModuloCrafteo)
+│   ├── Recicladora/      # Lógica del NPC de la recicladora (animaciones)
+│   └── UI/               # Scripts para la interfaz de usuario (menus, HUD, notificaciones)
+├── Settings/             # Configuraciones personalizadas (puede incluir sistemas de entrada o settings de paquetes)
+└── TextMesh Pro/         # Archivos y recursos del paquete TextMesh Pro para fuentes y texto
 
 Packages/                # Registra los paque
 ProjectSettings/         # Configuraciones del proyecto: Input, Tags, Layers, Build Settings, Quality, etc.
