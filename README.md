@@ -16,7 +16,7 @@ Consulte la página para mayor información sobre el desarrollo de este proyecto
 
 - ✅ Mecánica de **clasificación manual de residuos**: el jugador selecciona ítems y los lanza a la caneca correspondiente.
 - 🧠 Lógica del juego basada en **evaluación automática de aciertos y errores**, con retroalimentación visual y sonora.
-- 🌎 Niveles generados **aleatoriamente** con bolsas dCe basura de distintos niveles de rareza y dificultad.
+- 🌎 Niveles generados **aleatoriamente** con bolsas de basura de distintos niveles de rareza y dificultad.
 - 🔊 Efectos de sonido, música ambiental y posibilidad de activar/desactivar según preferencia del jugador.
 - 🎯 Compatible con **teclado y mouse** para escritorio, y diseñado también para dispositivos móviles Android 9+.
 
@@ -32,7 +32,6 @@ Consulte la página para mayor información sobre el desarrollo de este proyecto
 
 - 💻 Navegadores modernos o Windows 10+ (versión escritorio)
 - 📱 Android 9 o superior (versión móvil)
-- 🎮 Unity 2022 o superior
 
 ---
 
