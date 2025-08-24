@@ -41,6 +41,7 @@ public class ModuloCompra : Modulo
     /** </Setters> */
     public override void Interactuar()
     {
+        
         base.Interactuar();
         if (recicladora != null)
         {

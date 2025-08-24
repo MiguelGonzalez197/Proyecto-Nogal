@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
     // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
     // ───────────────────────────────────────
-    private CamaraOrbital camaraOrbital;        
+    private CamaraOrbital camaraOrbital;
     private Vector3 ultimaPosicionCamara;       // Registro ultima posicion de la camara antes de mover a punto fijo
     private Quaternion ultimaRotacionCamara;    // Registro ultima rotacion de la camara antes de mover a punto fijo
+    private Modulo moduloActivo;                // Referencia al modulo actualmente activo
 
     // ───────────────────────────────────────
     // 3. MÉTODOS UNITY
@@ -26,7 +27,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Application.targetFrameRate = 60;
-        camaraOrbital = GetComponentInChildren<CamaraOrbital>();
+        if (camara != null)
+        {
+            camaraOrbital = camara.GetComponent<CamaraOrbital>();
+            if (camaraOrbital == null)
+            {
+                camaraOrbital = camara.GetComponentInChildren<CamaraOrbital>();
+            }
+        }
         // mensajje de prueba
         //GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
         GenerarRotulosModulos();
@@ -41,17 +49,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void MoverACamaraFija(Transform Destino)
     {
-        if(camaraOrbital != null)
-        {
-            ultimaPosicionCamara = camara.position;
-            ultimaRotacionCamara = camara.rotation;
+        ultimaPosicionCamara = camara.position;
+        ultimaRotacionCamara = camara.rotation;
+        camara.position = Destino.position;
+        camara.rotation = Destino.rotation;
 
-            camaraOrbital.enabled = false;
-
-            camara.position = Destino.position;
-            camara.rotation = Destino.rotation;
-        }
-        
     }
 
     /// <summary>
@@ -78,9 +80,6 @@ public class GameManager : MonoBehaviour
         camara.position = valorPosicion.position;
         camara.rotation = valorPosicion.rotation;
     }
-    /// <summary>
-    /// Bloquea la cámara sin moverla, guardando su última posición.
-    /// </summary>
     public void BloquearCamara()
     {
         if (camaraOrbital != null)
@@ -90,6 +89,12 @@ public class GameManager : MonoBehaviour
             camaraOrbital.enabled = false;
         }
     }
+    public void DesbloquearCamara()
+    {
+        if (camaraOrbital != null)
+            camaraOrbital.enabled = true;
+    }
+
     /// <summary>
     /// Permite que la camara vuelva a su posicion original y permite rotar alrededor de la sala
     /// </summary>
@@ -98,18 +103,19 @@ public class GameManager : MonoBehaviour
         camara.position = ultimaPosicionCamara;
         camara.rotation = ultimaRotacionCamara;
 
-        camaraOrbital.enabled = true;
+       
     }
-    /// <summary>
-    /// Activa el control orbital sin modificar la posición actual de la cámara.
-    /// </summary>
-    public void DesbloquearCamara()
+    public void RegistrarModuloActivo(Modulo nuevoModulo)
     {
-        if (camaraOrbital != null)
+        if (moduloActivo != null && moduloActivo != nuevoModulo)
         {
-            camaraOrbital.enabled = true;
+            moduloActivo.DetenerProcesos();
+            RestaurarCamara();
         }
+        moduloActivo = nuevoModulo;
     }
+
+
     // ───────────────────────────────────────
     // 5. TEXTO FLOTANTE DE MODULOS
     // ───────────────────────────────────────

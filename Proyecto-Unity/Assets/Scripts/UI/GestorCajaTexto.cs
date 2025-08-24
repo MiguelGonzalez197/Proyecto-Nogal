@@ -15,6 +15,7 @@ public class GestorCajaTexto : MonoBehaviour
     private GameObject prefabCajaClasificacion;   // prefab anclado a la derecha
     [SerializeField]
     private Transform contenedorClasificacion;    // contenedor lateral
+    private GameObject mensajeActual;
 
     void Awake()
     {
@@ -24,20 +25,45 @@ public class GestorCajaTexto : MonoBehaviour
             Destroy(gameObject);
     }
 
-   
-    public void MostrarMensaje(string mensaje, float? duracion = null)
-    {
-        GameObject go = Instantiate(prefabCajaTexto, contenedorCanvas, worldPositionStays: false);
-        CajaTextoReutilizable caja = go.GetComponent<CajaTextoReutilizable>();
-        if (duracion.HasValue)
-            caja.tiempoCierreAutomatico = duracion.Value;
-        caja.Mostrar(mensaje);
-    }
 
+   
+    public void MostrarMensaje(string mensaje, float? duracion = null, bool cerrarPrevio = false)
+    {
+        if (cerrarPrevio && mensajeActual != null)
+        {
+            Destroy(mensajeActual);
+            mensajeActual = null;
+        }
+
+        mensajeActual = Instantiate(prefabCajaTexto, contenedorCanvas, worldPositionStays: false);
+        CajaTextoReutilizable caja = mensajeActual.GetComponent<CajaTextoReutilizable>();
+        if (duracion.HasValue)
+        {
+            caja.tiempoCierreAutomatico = duracion.Value;
+            caja.Mostrar(mensaje);
+        }
+    }
+        
+        
+    
     /// <summary>
-    /// Mensajes que aparecen en el costado derecho al clasificar items.
+    /// Oculta el mensaje actualmente visible si existe.
     /// </summary>
-    public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
+  public void OcultarMensajeActual()
+    {
+    if (mensajeActual == null) return;
+
+    CajaTextoReutilizable caja = mensajeActual.GetComponent<CajaTextoReutilizable>();
+    if (caja != null)
+        caja.Ocultar();
+
+    Destroy(mensajeActual);
+    mensajeActual = null;
+    }
+/// <summary>
+/// Mensajes que aparecen en el costado derecho al clasificar items.
+/// </summary>
+public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
     {
         if (prefabCajaClasificacion == null || contenedorClasificacion == null)
         {

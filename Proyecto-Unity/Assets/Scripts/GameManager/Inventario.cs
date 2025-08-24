@@ -14,6 +14,11 @@ public class Inventario : MonoBehaviour
     [SerializeField]
     private int perdidasPenitencias = 4000;
 
+    [Header("Estadisticas")]
+    [SerializeField] private int aciertos = 0;                          
+    [SerializeField] private int desaciertos = 0;  
+  
+
     [Header("Residuos recolectados")]
     [SerializeField]
     List<DatosItem> aprovechables = new List<DatosItem>();             
@@ -31,6 +36,8 @@ public class Inventario : MonoBehaviour
     public int ObtenerDinero() { return dinero; }
     public int ObtenerAprovechables() { return aprovechables.Count; }
     public int ObtenerOrganicos() { return aprovechables.Count; }
+    public int ObtenerAciertos() { return aciertos; }
+    public int ObtenerDesaciertos() { return desaciertos; }
     /** </Getters> */
 
     public void AgregarItemInventario(DatosItem datosItem)
@@ -86,6 +93,15 @@ public class Inventario : MonoBehaviour
         {
             organicosAprovechables.Remove(organicosAprovechables[organicosAprovechables.Count - 1]);
         }
+    }
+    public void RegistrarAcierto()
+    {
+        aciertos++;
+    }
+
+    public void RegistrarDesacierto()
+    {
+        desaciertos++;
     }
 
 

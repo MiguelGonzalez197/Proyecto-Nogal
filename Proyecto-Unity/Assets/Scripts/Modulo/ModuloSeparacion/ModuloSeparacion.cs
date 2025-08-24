@@ -56,6 +56,10 @@ public class ModuloSeparacion : Modulo
 
     public override void Interactuar()
     {
+        if (gameManager != null)
+        {
+            gameManager.BloquearCamara();
+        }
         base.Interactuar();
         bolsasHechas = 0;
         SpawnearBolsa();
@@ -152,7 +156,14 @@ public class ModuloSeparacion : Modulo
         }
         
     }
-
+    public override void DetenerProcesos()
+    {
+        base.DetenerProcesos();
+        ActivarBotonesMesa(false);
+        ActivarBotonMoverCamara(false);
+        ActivarCanva(false);
+        ActivarCollider(true);
+    }
     // ───────────────────────────────────────
     // 5. MÉTODOS PRIVADOS
     // ───────────────────────────────────────

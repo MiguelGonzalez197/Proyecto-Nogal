@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5fd38845e9e5b49890966ca6c32f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escenaJuego: SampleScene
+  escenaJuego: TutorialReciclaje
   panelAjustes: {fileID: 442428087}
 --- !u!4 &994458403
 Transform:
@@ -2411,7 +2411,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 52728770523709c468c0e75b51952a2a, type: 3}
   m_Resource: {fileID: 8300000, guid: 52728770523709c468c0e75b51952a2a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

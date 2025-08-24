@@ -56,6 +56,7 @@ public class ModuloCrafteo : Modulo
 
     public override void Interactuar()
     {
+        
         base.Interactuar();
 
     }
