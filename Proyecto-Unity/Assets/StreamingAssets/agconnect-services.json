@@ -1,0 +1,12 @@
+{
+	"client":{
+		"cp_id":"1",
+		"product_id":"1",
+		"client_id":"1",
+		"client_secret":"1",
+		"app_id":"1",
+		"package_name":"replace.with.your.json_https://evilminddevs.gitbook.io/hms-unity-plugin_/getting-started/quick-start/import-the-plugin-into-your-unity-project#obtaining-the-agconnect-services.json-file",
+		"api_key":"1"
+	},
+	"configuration_version":"1.0"
+}

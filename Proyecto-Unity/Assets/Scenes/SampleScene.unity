@@ -1648,7 +1648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ef9da9f9972498419596d02c2f570ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.294
+      value: -0.162
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8ef9da9f9972498419596d02c2f570ae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5485,6 +5485,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7776813944340962022, guid: 81d9b247683450c4db35a83aa72cf65b, type: 3}
   m_PrefabInstance: {fileID: 378270579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &402314191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2700726682996983417, guid: d066dda1ee1eb43498afb10da08eaac0, type: 3}
+  m_PrefabInstance: {fileID: 1061930911}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &402936699 stripped
 Transform:
@@ -12030,7 +12035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 234218181383001093, guid: 1066fbb539b3dfb41bcad427b34d664b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1
+      value: -2.72
       objectReference: {fileID: 0}
     - target: {fileID: 234218181383001093, guid: 1066fbb539b3dfb41bcad427b34d664b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19534,8 +19539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -330, y: -123}
-  m_SizeDelta: {x: 450, y: 851.66}
+  m_AnchoredPosition: {x: -330, y: -194.43933}
+  m_SizeDelta: {x: 450, y: 852.5389}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183549471
 MonoBehaviour:
@@ -29603,24 +29608,24 @@ MonoBehaviour:
   - objetoAVenta: {fileID: 1441181353}
     botonObjeto: {fileID: 0}
     precio: 5000
-    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
-  - objetoAVenta: {fileID: 0}
+    imagenCrafteable: {fileID: -1200309220, guid: f1b2c67bdbcb7764f9c701974a89e488, type: 3}
+  - objetoAVenta: {fileID: 402314191}
     botonObjeto: {fileID: 0}
     precio: 12000
-    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
+    imagenCrafteable: {fileID: 172020700, guid: ec6471f5f127e7d4ebd0d912918a6443, type: 3}
   - objetoAVenta: {fileID: 52807823}
     botonObjeto: {fileID: 0}
     precio: 7000
-    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
+    imagenCrafteable: {fileID: -1891632797, guid: ea8c4d080cd4c714a97b9264edebbaeb, type: 3}
   - objetoAVenta: {fileID: 2034977853}
     botonObjeto: {fileID: 0}
     precio: 2000
-    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
+    imagenCrafteable: {fileID: -1891225710, guid: e56d73152ea2d20459f05ff62975b65c, type: 3}
   modulosDisponibles:
   - objetoAVenta: {fileID: 1644471554}
     botonObjeto: {fileID: 0}
     precio: 30000
-    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
+    imagenCrafteable: {fileID: -2120801073, guid: fa2116e468248da47b7caf18550b5976, type: 3}
 --- !u!4 &1725329485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 224bf7a6e33f8a24cb82701faf3b737b, type: 3}
@@ -35031,13 +35036,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140126145}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.089697264, y: 0.9904319, z: -0.009459316, w: 0.10444922}
-  m_LocalPosition: {x: -0.15399885, y: 0.802, z: 0.36}
+  m_LocalRotation: {x: 0.007517817, y: 0.9976125, z: -0.05164379, w: 0.04523026}
+  m_LocalPosition: {x: 0.012998423, y: 0.371, z: 0.5730001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1644471556}
-  m_LocalEulerAnglesHint: {x: 2.148, y: 168.15, z: 10.127}
+  m_LocalEulerAnglesHint: {x: 5.953, y: 174.839, z: 0.595}
 --- !u!1001 &2141098628
 PrefabInstance:
   m_ObjectHideFlags: 0

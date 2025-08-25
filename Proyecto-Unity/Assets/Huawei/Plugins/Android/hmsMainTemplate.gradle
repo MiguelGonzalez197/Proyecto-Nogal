@@ -1,0 +1,4 @@
+dependencies {
+	implementation 'com.huawei.hms:base:6.6.0.300'
+	implementation 'com.huawei.agconnect:agconnect-core:1.6.5.300'
+	}
