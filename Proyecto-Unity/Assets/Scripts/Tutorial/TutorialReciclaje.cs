@@ -14,6 +14,12 @@ public class TutorialReciclaje : MonoBehaviour
     [SerializeField] private Inventario inventario;
     [SerializeField] private AudioClip[] clips;      // Asigna Audio1, Audio2, etc. en el Inspector.
     [SerializeField] private AudioSource audioSrc;
+
+
+    [Header("Referencia pantalla de carga")]
+    [SerializeField] private GameObject pantallaCarga;
+    [SerializeField] private GameObject menuPrincipal;
+
     private const string PREF_TUTORIAL = "TutorialCompletado";
     private const string PREF_NOMBRE_JUGADOR = "NombreJugador";
  
@@ -40,7 +46,8 @@ public class TutorialReciclaje : MonoBehaviour
     {
         if (PlayerPrefs.GetInt(PREF_TUTORIAL, 0) == 1)
         {
-            SceneManager.LoadScene(escenaPrincipal);
+            PrepararEscenaPrincipal();
+            //SceneManager.LoadScene(escenaPrincipal);
             return;
         }
         
@@ -74,7 +81,8 @@ public class TutorialReciclaje : MonoBehaviour
     {
         PlayerPrefs.SetInt(PREF_TUTORIAL, 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(escenaPrincipal);
+        PrepararEscenaPrincipal();
+        //SceneManager.LoadScene(escenaPrincipal);
     }
 
     private IEnumerator MostrarTutorial()
@@ -255,7 +263,8 @@ public class TutorialReciclaje : MonoBehaviour
         PlayerPrefs.SetInt(PREF_TUTORIAL, 1);
         PlayerPrefs.Save();
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(escenaPrincipal);
+        PrepararEscenaPrincipal();
+        //SceneManager.LoadScene(escenaPrincipal);
 
     }
     private void SetColliders(bool separacion, bool compra, bool crafteo)
@@ -332,5 +341,26 @@ public class TutorialReciclaje : MonoBehaviour
                 return;
         }
         GestorCajaTexto.Instancia.MostrarMensaje(mensaje, 5f);
+    }
+
+    private void PrepararEscenaPrincipal()
+    {
+        if (pantallaCarga == null || menuPrincipal == null) return;
+        if (!string.IsNullOrEmpty(escenaPrincipal))
+        {
+            pantallaCarga.SetActive(true);
+            menuPrincipal.SetActive(false);
+            StartCoroutine(CargarNivel());
+        }
+    }
+
+    private IEnumerator CargarNivel()
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(escenaPrincipal);
+
+        while (!loadOperation.isDone)
+        {
+            yield return null;
+        }
     }
 }

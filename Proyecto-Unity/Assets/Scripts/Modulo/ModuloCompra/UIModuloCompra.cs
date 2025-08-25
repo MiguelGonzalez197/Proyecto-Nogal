@@ -73,6 +73,7 @@ public class UIModuloCompra : MonoBehaviour
 
 
             EstablecerTextoPrecioBotones(lista[i]);
+            EstablecerImagen(lista[i]);
 
         }
     }
@@ -81,6 +82,15 @@ public class UIModuloCompra : MonoBehaviour
     {
         TextMeshProUGUI precio = copiaDatosInstancia.botonObjeto.GetComponentInChildren<TextMeshProUGUI>();
         precio.text = (copiaDatosInstancia.precio).ToString() + (" $");
+    }
+
+    private void EstablecerImagen(ObjetoComprable objeto)
+    {
+        if (objeto.imagenCrafteable != null)
+        {
+            Image imagenHija = objeto.botonObjeto.transform.Find("Image").GetComponent<Image>();
+            imagenHija.sprite = objeto.imagenCrafteable;
+        }
     }
 
     private void InicializarBotones(ref List<ObjetoComprable> lista)

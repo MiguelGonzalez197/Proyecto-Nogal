@@ -24,5 +24,6 @@ public class ObjetoComprable
     public GameObject objetoAVenta;
     public Button botonObjeto;
     public int precio;
+    public Sprite imagenCrafteable;
 }
 
