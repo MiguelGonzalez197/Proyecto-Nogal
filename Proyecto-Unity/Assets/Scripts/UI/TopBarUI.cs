@@ -4,6 +4,8 @@ using TMPro;
 
 public class TopBarUI : MonoBehaviour
 {
+    public static TopBarUI Instancia { get; private set; }
+
     private Inventario inventario;
 
     [SerializeField] private TextMeshProUGUI dineroText;
@@ -14,10 +16,18 @@ public class TopBarUI : MonoBehaviour
 
     private void Awake()
     {
+        if (Instancia != null && Instancia != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instancia = this;
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
+
         inventario = FindObjectOfType<Inventario>();
 
-        if (ajustesButton != null)
-            ajustesButton.onClick.AddListener(AbrirAjustes);
 
         ActualizarNombre();
     }
@@ -30,7 +40,7 @@ public class TopBarUI : MonoBehaviour
         if (inventario != null)
         {
             if (dineroText != null)
-                dineroText.text = $"Dinero: {inventario.ObtenerDinero()}";
+                dineroText.text = $"$ {inventario.ObtenerDinero()}";
 
             if (aciertosText != null)
                 aciertosText.text = $"Aciertos: {inventario.ObtenerAciertos()}";
@@ -46,10 +56,5 @@ public class TopBarUI : MonoBehaviour
             nombreText.text = $"Nombre: {PlayerPrefs.GetString("NombreJugador", "Jugador")}";
     }
 
-    private void AbrirAjustes()
-    {
-        AjustesKeep ajustes = FindObjectOfType<AjustesKeep>();
-        if (ajustes != null)
-            ajustes.ToggleAjustes();
-    }
+    
 }

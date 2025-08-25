@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Referencias")]
     [SerializeField]
     private Transform camara;
+    [SerializeField] private TMP_FontAsset fuenteRotulo;
 
     // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
@@ -136,6 +137,7 @@ public class GameManager : MonoBehaviour
         rotulo.transform.localPosition = new Vector3(0f, 1.2f, 0f);
 
         TextMeshPro tm = rotulo.AddComponent<TextMeshPro>();
+        tm.font = fuenteRotulo;          // <─ Asignas la fuente
         tm.text = texto;
         tm.color = color;
         tm.alignment = TextAlignmentOptions.Center;
@@ -157,4 +159,5 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
 }

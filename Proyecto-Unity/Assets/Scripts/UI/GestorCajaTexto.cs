@@ -19,11 +19,18 @@ public class GestorCajaTexto : MonoBehaviour
 
     void Awake()
     {
-        if (Instancia == null)
-            Instancia = this;
-        else
+        if (Instancia != null && Instancia != this)
+        {
             Destroy(gameObject);
+            return;
+        }
+
+        Instancia = this;
+        transform.SetParent(null);
+        DontDestroyOnLoad(gameObject);
     }
+   
+    
 
 
    

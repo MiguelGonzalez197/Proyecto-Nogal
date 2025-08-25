@@ -8,7 +8,7 @@ public class Inventario : MonoBehaviour
     // ───────────────────────────────────────
     [Header("Economia")]
     [SerializeField]
-    private int dinero = 10000;                                             // Cantidad de dinero obtenida
+    private int dinero = 0;                                             // Cantidad de dinero obtenida
     [SerializeField]
     private int ganancias = 2000;                                           
     [SerializeField]

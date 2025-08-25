@@ -43,15 +43,15 @@ public class TutorialReciclaje : MonoBehaviour
             SceneManager.LoadScene(escenaPrincipal);
             return;
         }
-
+        
         StartCoroutine(EsperarNombreEIniciar());
     }
 
     private IEnumerator EsperarNombreEIniciar()
     {
-        SetColliders(false, false, false);
+        
         yield return new WaitUntil(() => !string.IsNullOrEmpty(PlayerPrefs.GetString(PREF_NOMBRE_JUGADOR, "")));
-
+      
         gameManager = FindObjectOfType<GameManager>();
         moduloSeparacion = FindObjectOfType<ModuloSeparacion>();
         moduloCompra = FindObjectOfType<ModuloCompra>();
@@ -65,7 +65,7 @@ public class TutorialReciclaje : MonoBehaviour
         {
             gameManager.BloquearCamara();
         }
-
+        SetColliders(false, false, false);
         StartCoroutine(MostrarTutorial());
     }
    
@@ -199,7 +199,7 @@ public class TutorialReciclaje : MonoBehaviour
 
         inventario?.AsegurarDinero(10000);
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Te hemos entregado 10.000 monedas para que compres la mesa de crafteo.",
+            "Te hemos entregado 30.000 monedas para que compres la mesa de crafteo.",
             17);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
