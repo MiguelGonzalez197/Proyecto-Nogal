@@ -28519,7 +28519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 464369396}
   posicionesCamara:
-  - {fileID: 0}
+  - {fileID: 2140126146}
   posicionesItems:
   - {fileID: 1100662417}
   canvaModulo: {fileID: 1892892759}
@@ -29578,7 +29578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContenedorDecoraciones: {fileID: 805357514}
   ContenedorModulos: {fileID: 32194702}
-  prefabBoton: {fileID: 1223455104907729062, guid: d5be12f7106698541bf035ea39ff8e5f, type: 3}
+  prefabBoton: {fileID: 1223455104907729062, guid: 966f7617157b68b43a72a2d5e318e726, type: 3}
 --- !u!114 &1722621434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29603,19 +29603,24 @@ MonoBehaviour:
   - objetoAVenta: {fileID: 1441181353}
     botonObjeto: {fileID: 0}
     precio: 5000
+    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
   - objetoAVenta: {fileID: 0}
     botonObjeto: {fileID: 0}
     precio: 12000
+    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
   - objetoAVenta: {fileID: 52807823}
     botonObjeto: {fileID: 0}
     precio: 7000
+    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
   - objetoAVenta: {fileID: 2034977853}
     botonObjeto: {fileID: 0}
     precio: 2000
+    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
   modulosDisponibles:
   - objetoAVenta: {fileID: 1644471554}
     botonObjeto: {fileID: 0}
     precio: 30000
+    imagenCrafteable: {fileID: 21300000, guid: 2eee7e07e39c0fa46bf74d47b7e2570d, type: 3}
 --- !u!4 &1725329485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 224bf7a6e33f8a24cb82701faf3b737b, type: 3}
