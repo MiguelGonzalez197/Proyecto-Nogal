@@ -45,7 +45,9 @@ public class Caneca : MonoBehaviour
         {
             itemsProcesados.Add(itemActual);
             gestorInventario.DisminuirDineroError();
+            gestorInventario.RegistrarDesacierto();
             Debug.Log("Este item no pertenece a esta caneca");
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Ese residuo iba en otra caneca");
             return;
         } 
             
@@ -70,6 +72,7 @@ public class Caneca : MonoBehaviour
                 if (EsBolsaNegra(datosItem))
                 {
                     Debug.Log("Es bolsa negra");
+                    gestorInventario.RegistrarDesacierto();
                     gestorInventario.DisminuirDineroError();
                     return;
                 }
@@ -104,6 +107,12 @@ public class Caneca : MonoBehaviour
         {
             gestorInventario.AgregarItemInventario(datosItem);
             gestorInventario.AgregarDinero();
+            gestorInventario.RegistrarAcierto();
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Clasificado correctamente");
+        }
+        if (GestorCajaTexto.Instancia != null)
+        {
+            GestorCajaTexto.Instancia.OcultarMensajeActual();
         }
     }
 

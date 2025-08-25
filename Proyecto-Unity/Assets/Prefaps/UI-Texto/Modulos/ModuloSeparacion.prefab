@@ -1258,8 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipoCaneca: 1
-  cantidad: 0
-  residuosRecolectados: []
+  gestorInventario: {fileID: 0}
 --- !u!65 &651273224750255311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1439,7 +1438,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4300006994140473310, guid: a1e582ab09ad721449bc84887e152ab2, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 221394305155788564}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3523892129602501988, guid: a1e582ab09ad721449bc84887e152ab2, type: 3}
@@ -1470,8 +1469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipoCaneca: 0
-  cantidad: 0
-  residuosRecolectados: []
+  gestorInventario: {fileID: 0}
 --- !u!54 &5307935845156476625
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1638,8 +1636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipoCaneca: 2
-  cantidad: 0
-  residuosRecolectados: []
+  gestorInventario: {fileID: 0}
 --- !u!65 &3235459714466928159
 BoxCollider:
   m_ObjectHideFlags: 0

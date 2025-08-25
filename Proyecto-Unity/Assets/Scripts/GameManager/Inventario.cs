@@ -8,11 +8,16 @@ public class Inventario : MonoBehaviour
     // ───────────────────────────────────────
     [Header("Economia")]
     [SerializeField]
-    private int dinero = 10000;                                             // Cantidad de dinero obtenida
+    private int dinero = 0;                                             // Cantidad de dinero obtenida
     [SerializeField]
     private int ganancias = 2000;                                           
     [SerializeField]
     private int perdidasPenitencias = 4000;
+
+    [Header("Estadisticas")]
+    [SerializeField] private int aciertos = 0;                          
+    [SerializeField] private int desaciertos = 0;  
+  
 
     [Header("Residuos recolectados")]
     [SerializeField]
@@ -31,6 +36,8 @@ public class Inventario : MonoBehaviour
     public int ObtenerDinero() { return dinero; }
     public int ObtenerAprovechables() { return aprovechables.Count; }
     public int ObtenerOrganicos() { return aprovechables.Count; }
+    public int ObtenerAciertos() { return aciertos; }
+    public int ObtenerDesaciertos() { return desaciertos; }
     /** </Getters> */
 
     public void AgregarItemInventario(DatosItem datosItem)
@@ -66,7 +73,10 @@ public class Inventario : MonoBehaviour
         dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
     }
-
+    public void AsegurarDinero(int cantidadMinima)
+    {
+        dinero = Mathf.Max(dinero, cantidadMinima);
+    }
     public void DisminuirAprovechables(int cantidad)
     {
         if (aprovechables.Count < 0) return;
@@ -83,6 +93,15 @@ public class Inventario : MonoBehaviour
         {
             organicosAprovechables.Remove(organicosAprovechables[organicosAprovechables.Count - 1]);
         }
+    }
+    public void RegistrarAcierto()
+    {
+        aciertos++;
+    }
+
+    public void RegistrarDesacierto()
+    {
+        desaciertos++;
     }
 
 

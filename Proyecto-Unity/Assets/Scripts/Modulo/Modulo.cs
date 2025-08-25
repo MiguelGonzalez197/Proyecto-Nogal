@@ -51,8 +51,9 @@ public class Modulo : MonoBehaviour , IInteractuable
     /// </summary>
     public virtual void Interactuar()
     {
-        if(gameManager != null || posicionesCamara.Count > 0)
+        if (gameManager != null && posicionesCamara.Count > 0)
         {
+            gameManager.RegistrarModuloActivo(this);
             gameManager.MoverACamaraFija(posicionesCamara[0]);
         }
 
@@ -64,6 +65,7 @@ public class Modulo : MonoBehaviour , IInteractuable
     public virtual void SalirModuloCallback()
     {
         gameManager.RestaurarCamara();
+        gameManager.RegistrarModuloActivo(null);
         ActivarCanva(false);
         ActivarCollider(true);
     }
@@ -91,11 +93,15 @@ public class Modulo : MonoBehaviour , IInteractuable
             boxCollider.enabled = bActivar;
         }
     }
-
+    public virtual void DetenerProcesos()
+    {
+        StopAllCoroutines();
+    }
     protected IEnumerator SalirModulo()
     {
         yield return new WaitForSeconds(1.5f);
         gameManager.RestaurarCamara();
+        gameManager.RegistrarModuloActivo(null);
         ActivarCanva(false);
         ActivarCollider(true);
     }

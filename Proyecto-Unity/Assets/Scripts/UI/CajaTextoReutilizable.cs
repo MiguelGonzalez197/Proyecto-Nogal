@@ -22,9 +22,7 @@ public class CajaTextoReutilizable : MonoBehaviour
         OcultarInstantaneo();
     }
 
-    /// <summary>
-    /// Muestra el recuadro con el texto dado.
-    /// </summary>
+    
     public void Mostrar(string mensaje)
     {
         mensajeTMP.text = mensaje;
@@ -48,7 +46,10 @@ public class CajaTextoReutilizable : MonoBehaviour
     /// </summary>
     public void Ocultar()
     {
+        if (rutinaOcultar != null)
+            StopCoroutine(rutinaOcultar);
         OcultarInstantaneo();
+        Destroy(gameObject);
     }
 
     private void MostrarInstantaneo()

@@ -13,15 +13,16 @@ public class ModuloSeparacion : Modulo
     [Header("Referencias Modulo Separacion")]
     [SerializeField]
     private List<GameObject> botonesCanva = new List<GameObject>();
+   
 
     [Header("Prefabs Modulo Separacion")]
     [SerializeField]
     private List<Bolsa> prefabsBolsas = new List<Bolsa>();                          
 
     [Header("Valores Modulo Separacion")]
-    [Range(1,5)]
+    [Range(1,8)]
     [SerializeField]
-    private int numeroBolsasDisponibles = 3;                                        // Establece un limite de bolsas por cada vez que se interactua con el modulo
+    private int numeroBolsasDisponibles = 4;                                        // Establece un limite de bolsas por cada vez que se interactua con el modulo
 
     // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
@@ -31,11 +32,13 @@ public class ModuloSeparacion : Modulo
     private List<Vector3> spawnsContenido = new List<Vector3>();                    // Lista de posiciones para cada contenido de las bolsas
     private Queue<GameObject> referenciasResiduosBolsa = new Queue<GameObject>();   // Fila FIFO con referencias de los items generados
 
+
     private Bolsa bolsaActual;                                                      // Referencia al componente de la bolsa generada
     private GameObject itemActual;                                                  // Referencia al item con el que se esta tratando
     private IItem interfaceItemActual;                                              // Interface del item actual
     private int bolsasHechas = 0;                                                   // Contador de cada bolsa realizada
     private bool bEstaLaCamaraALaIzquierda = true;                                  // Booleano que permite saber si la camara esta en la posicion 1 o la posicion 2
+    public bool HaClasificadoTodasLasBolsas => bolsasHechas >= numeroBolsasDisponibles;
 
     // ───────────────────────────────────────
     // 3. MÉTODOS UNITY
@@ -53,6 +56,10 @@ public class ModuloSeparacion : Modulo
 
     public override void Interactuar()
     {
+        if (gameManager != null)
+        {
+            gameManager.BloquearCamara();
+        }
         base.Interactuar();
         bolsasHechas = 0;
         SpawnearBolsa();
@@ -94,6 +101,7 @@ public class ModuloSeparacion : Modulo
         if (!EsBolsaNegra(datosItem))
         {
             Debug.Log("No era necesario abrirla");
+            GestorCajaTexto.Instancia?.MostrarMensajeClasificacion("Esa bolsa no necesitaba abrirse");
         }
 
         prefabsResiduosBolsa = bolsaActual.ObtenerContenido();
@@ -148,7 +156,14 @@ public class ModuloSeparacion : Modulo
         }
         
     }
-
+    public override void DetenerProcesos()
+    {
+        base.DetenerProcesos();
+        ActivarBotonesMesa(false);
+        ActivarBotonMoverCamara(false);
+        ActivarCanva(false);
+        ActivarCollider(true);
+    }
     // ───────────────────────────────────────
     // 5. MÉTODOS PRIVADOS
     // ───────────────────────────────────────
@@ -172,6 +187,7 @@ public class ModuloSeparacion : Modulo
         for (int i = 0; i < cantidad; i++)
         {
             GameObject instancia = Instantiate(prefabsResiduosBolsa[i], spawnsContenido[i], Quaternion.identity);
+            
             RegistrarEnFilaReferenciaResiduosBolsa(instancia);
             SuscribirItemADestruccion(instancia);
         }
@@ -181,15 +197,22 @@ public class ModuloSeparacion : Modulo
     {
         if(referenciasResiduosBolsa.Count > 0)
         {
+            
             itemActual = referenciasResiduosBolsa.Dequeue();
+
+         
+            TutorialReciclaje.MostrarMensajeResiduo(itemActual);
+            
             ObtenerInterfaceItem(itemActual);
             if (interfaceItemActual != null)
             {
                 interfaceItemActual.MoverHaciaPosicion(posicionesItems[1], duracionMovimientoCamara);
+
             }
         }
         else
         {
+            TutorialReciclaje.DesactivarInteracciones();
             bolsasHechas++;
             MoverCamara();
             SpawnearBolsa();
@@ -217,10 +240,13 @@ public class ModuloSeparacion : Modulo
 
     private void ActivarBotonesMesa(bool bActivar)
     {
-        if(botonesCanva.Count > 1)
+        if (botonesCanva.Count > 1)
         {
-            botonesCanva[0].SetActive(bActivar);     // Boton abrir bolsa
-            botonesCanva[1].SetActive(bActivar);     // Boton botar bolsa
+            if (botonesCanva[0] != null)
+                botonesCanva[0].SetActive(bActivar);     // Boton abrir bolsa
+
+            if (botonesCanva[1] != null)
+                botonesCanva[1].SetActive(bActivar);     // Boton botar bolsa
         }
     }
 
@@ -228,7 +254,8 @@ public class ModuloSeparacion : Modulo
     {
         if (botonesCanva.Count > 2)
         {
-            botonesCanva[2].SetActive(bActivar);
+            if (botonesCanva[2] != null)
+                botonesCanva[2].SetActive(bActivar);
         }
     }
 
