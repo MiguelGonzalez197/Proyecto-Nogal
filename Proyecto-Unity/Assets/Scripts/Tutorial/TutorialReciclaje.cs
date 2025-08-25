@@ -197,7 +197,7 @@ public class TutorialReciclaje : MonoBehaviour
         indice++;
         yield return new WaitForSeconds(11);
 
-        inventario?.AsegurarDinero(10000);
+        inventario?.AsegurarDinero(30000);
         GestorCajaTexto.Instancia.MostrarMensaje(
             "Te hemos entregado 30.000 monedas para que compres la mesa de crafteo.",
             17);
