@@ -7,7 +7,6 @@ public class TutorialReciclaje : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private string escenaPrincipal = "SampleScene";
-    [SerializeField] private float duracionMensaje = 5f;
     [SerializeField] private ModuloSeparacion moduloSeparacion;
     [SerializeField] private ModuloCompra moduloCompra;
     [SerializeField] private ModuloCrafteo moduloCrafteo;

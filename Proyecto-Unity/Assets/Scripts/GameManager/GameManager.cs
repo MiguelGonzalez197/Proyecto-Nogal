@@ -40,6 +40,11 @@ public class GameManager : MonoBehaviour
         //GestorCajaTexto.Instancia.MostrarMensaje("¡Prueba exitosa!", 2f);
         GenerarRotulosModulos();
     }
+    void Awake()
+    {
+        Input.simulateMouseWithTouches = true;
+    }
+
 
     // ───────────────────────────────────────
     // 4. MÉTODOS PÚBLICOS
