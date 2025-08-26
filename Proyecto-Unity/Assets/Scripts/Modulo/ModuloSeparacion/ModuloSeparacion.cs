@@ -62,6 +62,7 @@ public class ModuloSeparacion : Modulo
         }
         base.Interactuar();
         bolsasHechas = 0;
+        ActivarBotonesMesa(true);
         SpawnearBolsa();
     }
 
