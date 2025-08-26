@@ -56,10 +56,7 @@ public class ModuloSeparacion : Modulo
 
     public override void Interactuar()
     {
-        if (gameManager != null)
-        {
-            gameManager.BloquearCamara();
-        }
+        
         base.Interactuar();
         bolsasHechas = 0;
         ActivarBotonesMesa(true);
@@ -87,7 +84,7 @@ public class ModuloSeparacion : Modulo
         }
         else
         {
-            StartCoroutine(SalirModulo());
+            StartCoroutine(SalirModulo(1.5f));
         }
     }
 

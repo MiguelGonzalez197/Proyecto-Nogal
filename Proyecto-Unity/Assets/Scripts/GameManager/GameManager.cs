@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         //Application.targetFrameRate = 60;
         if (camara != null)
         {
-            camaraOrbital = camara.GetComponent<CamaraOrbital>();
+            camaraOrbital = GetComponentInChildren<CamaraOrbital>();
             if (camaraOrbital == null)
             {
                 camaraOrbital = camara.GetComponentInChildren<CamaraOrbital>();

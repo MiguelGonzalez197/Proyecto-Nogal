@@ -69,7 +69,7 @@ public class TutorialReciclaje : MonoBehaviour
         
         if (gameManager != null)
         {
-            gameManager.BloquearCamara();
+            //gameManager.BloquearCamara();
         }
         SetColliders(false, false, false);
         StartCoroutine(MostrarTutorial());
