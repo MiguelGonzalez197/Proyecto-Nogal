@@ -6,7 +6,7 @@
 ## 🌐 Página Web
 
 El link explicativo de este videojuego es:  
-👉 [Visitar la página web del proyecto](https://sites.google.com/unimilitar.edu.co/ecomision/inicio)
+👉 [Visitar la página web del proyecto y Links de descarga del juego](https://sites.google.com/unimilitar.edu.co/ecomision/inicio)
 
 
 Consulte la página para mayor información sobre el desarrollo de este proyecto.
