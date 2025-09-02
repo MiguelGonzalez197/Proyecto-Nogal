@@ -1,0 +1,8 @@
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/GameActivity/CMakeFiles/game.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+E:/Proyecto-Nogal/Proyecto-Unity/.utmp/RelWithDebInfo/1s4r5o17/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir
