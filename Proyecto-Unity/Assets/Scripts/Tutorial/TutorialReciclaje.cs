@@ -95,11 +95,11 @@ public class TutorialReciclaje : MonoBehaviour
         yield return new WaitForSeconds(10);
         GestorCajaTexto.Instancia.MostrarMensaje(
             "El reciclaje es el proceso de recoger y transformar los residuos para darles una segunda vida, reduciendo la cantidad de basura que llega a los rellenos sanitarios y el uso de recursos naturales.",
-            10);
+            9);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
         indice++;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(9);
         GestorCajaTexto.Instancia.MostrarMensaje(
             "Separar correctamente los residuos desde casa permite que los materiales aprovechables lleguen limpios a los centros de reciclaje y disminuye la contaminación en nuestro entorno.",
             9);
@@ -128,27 +128,6 @@ public class TutorialReciclaje : MonoBehaviour
         audioSrc.Play();
         indice++;
         yield return new WaitForSeconds(10);
-        GestorCajaTexto.Instancia.MostrarMensaje(
-            "Ejemplos para la caneca verde: manzana, pan, brócoli, hamburguesa, sándwich de pollo, huevos, lechuga o arroz; todos son restos que se descomponen fácilmente.",
-            10);
-        audioSrc.clip = clips[indice];
-        audioSrc.Play();
-        indice++;
-        yield return new WaitForSeconds(10);
-        GestorCajaTexto.Instancia.MostrarMensaje(
-            "Ejemplos para la caneca blanca: libro, botella de plástico limpia, botella de vidrio en buen estado, martillo, palanca, caja de cartón, pocillo o sartén sin óxido; son materiales que pueden reciclarse o reutilizarse.",
-            13);
-        audioSrc.clip = clips[indice];
-        audioSrc.Play();
-        indice++;
-        yield return new WaitForSeconds(13);
-        GestorCajaTexto.Instancia.MostrarMensaje(
-            "Ejemplos para la caneca negra: botella sucia, lata de comida sucia, lata de pintura, caneca de pintura, caja de pizza sucia o lata oxidada; al estar contaminados no pueden aprovecharse.",
-            9);
-        audioSrc.clip = clips[indice];
-        audioSrc.Play();
-        indice++;
-        yield return new WaitForSeconds(9);
         if (moduloSeparacion != null)
         {
             SetColliders(true, false, false);
