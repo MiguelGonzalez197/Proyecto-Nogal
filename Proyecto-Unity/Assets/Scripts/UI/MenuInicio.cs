@@ -14,6 +14,8 @@ public class MenuInicio : MonoBehaviour
 
     void Start()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         if (panelAjustes != null)
             panelAjustes.SetActive(false);
     }

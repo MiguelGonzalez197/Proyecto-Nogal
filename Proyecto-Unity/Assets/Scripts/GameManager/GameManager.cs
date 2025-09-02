@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     // ───────────────────────────────────────
     void Start()
     {
-        //Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         if (camara != null)
         {
             camaraOrbital = GetComponentInChildren<CamaraOrbital>();
