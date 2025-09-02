@@ -31345,7 +31345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objetivoCamara: {fileID: 1566186666}
   pivoteVertical: {fileID: 689645050}
-  velocidadRotacion: 5
+  velocidadRotacion: 3
   anguloMinimo: 0
   anguloMaximo: 45
 --- !u!1001 &1568803040
