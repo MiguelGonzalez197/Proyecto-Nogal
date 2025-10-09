@@ -9,6 +9,18 @@ public struct DatosItem
 }
 
 [System.Serializable]
+public struct RegistroJugador
+{
+    public string nombreJugador;
+    public int edadJugador;
+    public bool tutorialCompletado;
+    public int aciertosTotales;
+    public int desaciertosTotales;
+    public int dineroRecolectado;
+    public string tiempoSesion;
+}
+
+[System.Serializable]
 public class ObjetoCrafteable
 {
     public GameObject objetoACraftear;

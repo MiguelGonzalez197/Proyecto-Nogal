@@ -21,7 +21,8 @@ public class TutorialReciclaje : MonoBehaviour
 
     private const string PREF_TUTORIAL = "TutorialCompletado";
     private const string PREF_NOMBRE_JUGADOR = "NombreJugador";
- 
+    private const string PREF_EDAD_JUGADOR = "EdadJugador";
+
 
     private Collider colliderModuloSeparacion;
     private Collider colliderModuloCompra;
@@ -55,9 +56,10 @@ public class TutorialReciclaje : MonoBehaviour
 
     private IEnumerator EsperarNombreEIniciar()
     {
-        
         yield return new WaitUntil(() => !string.IsNullOrEmpty(PlayerPrefs.GetString(PREF_NOMBRE_JUGADOR, "")));
-      
+
+        
+
         gameManager = FindObjectOfType<GameManager>();
         moduloSeparacion = FindObjectOfType<ModuloSeparacion>();
         moduloCompra = FindObjectOfType<ModuloCompra>();
@@ -326,6 +328,7 @@ public class TutorialReciclaje : MonoBehaviour
         if (pantallaCarga == null || menuPrincipal == null) return;
         if (!string.IsNullOrEmpty(escenaPrincipal))
         {
+            GestorDatos.instancia.RegistrarExitoTutorial(true);
             pantallaCarga.SetActive(true);
             menuPrincipal.SetActive(false);
             StartCoroutine(CargarNivel());

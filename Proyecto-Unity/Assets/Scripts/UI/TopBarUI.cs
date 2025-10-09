@@ -54,6 +54,10 @@ public class TopBarUI : MonoBehaviour
     {
         if (nombreText != null)
             nombreText.text = $"Nombre: {PlayerPrefs.GetString("NombreJugador", "Jugador")}";
+            GestorDatos.instancia.RegistrarDatosJugador(
+                PlayerPrefs.GetString("NombreJugador", "Jugador"), 
+                PlayerPrefs.GetInt("EdadJugador", 0)
+                );
     }
 
     

@@ -60,18 +60,23 @@ public class Inventario : MonoBehaviour
     {
         Debug.Log("Agregando dinero");
         dinero += ganancias;
+        RegistrarInventario();
     }
+
+
 
     public void DisminuirDineroError()
     {
         dinero -= perdidasPenitencias;
         dinero = Mathf.Clamp(dinero, 0, 100000);
+        RegistrarInventario();
     }
 
     public void DisminuirDinero(int cantidad)
     {
         dinero -= cantidad;
         dinero = Mathf.Clamp(dinero, 0, 100000);
+        RegistrarInventario();
     }
     public void AsegurarDinero(int cantidadMinima)
     {
@@ -97,12 +102,20 @@ public class Inventario : MonoBehaviour
     public void RegistrarAcierto()
     {
         aciertos++;
+        RegistrarInventario();
     }
 
     public void RegistrarDesacierto()
     {
         desaciertos++;
+        RegistrarInventario();
     }
 
-
+    private void RegistrarInventario()
+    {
+        if (GestorDatos.instancia != null && GestorDatos.instancia.CompletoTutorial())
+        {
+            GestorDatos.instancia.RegistrarReciclaje(this);
+        }
+    }
 }

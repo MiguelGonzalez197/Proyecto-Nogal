@@ -41,5 +41,6 @@ public class NombreJugadorInput : MonoBehaviour
         TopBarUI barra = FindObjectOfType<TopBarUI>();
         if (barra != null)
             barra.ActualizarNombre();
+
     }
 }
