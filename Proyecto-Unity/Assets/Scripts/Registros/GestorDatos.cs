@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GestorDatos : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class GestorDatos : MonoBehaviour
     private RegistroJugador registroJugador;
 
     private float tiempoOcurrido;
+    string urlHojaCalculo = "https://script.google.com/macros/s/AKfycbwuNA_g_0YpFvUqm4WJgcH56Ff644ypVCS3gY3CzosRakPIXpPLeonX1L7VxAzIe5Bc4Q/exec";
 
     void Awake()
     {
@@ -25,20 +29,33 @@ public class GestorDatos : MonoBehaviour
         registroJugador.tutorialCompletado = false;
     }
 
+    void Start()
+    {
+        RegistrarDatosJugador("Test", 10);
+        RegistrarExitoTutorial(true);
+        StartCoroutine(Enviar(registroJugador));
+    }
 
     void Update()
     {
         RegistrarTiempo();
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("Boton presionado para guardar");
+            GuardarDatos();
+        }
     }
 
     void OnApplicationPause(bool pause)
     {
-        if (pause) GuardarDatos();
+        //if (pause) GuardarDatos();
     }
 
     void OnApplicationQuit()
     {
-        GuardarDatos();
+        //GuardarDatos();
+
     }
 
     public void RegistrarDatosJugador(string nombre, int edad)
@@ -66,7 +83,8 @@ public class GestorDatos : MonoBehaviour
 
     private void GuardarDatos()
     {
-        RegistradorReciclaje.RegistrarDatos(registroJugador); ;
+        StartCoroutine(Enviar(registroJugador));
+        //RegistradorReciclaje.RegistrarDatos(registroJugador); ;
     }
 
     private void RegistrarTiempo()
@@ -75,5 +93,23 @@ public class GestorDatos : MonoBehaviour
         int minutos = Mathf.FloorToInt(tiempoOcurrido / 60);
         int segundos = Mathf.FloorToInt(tiempoOcurrido % 60);
         registroJugador.tiempoSesion = string.Format("{0:00}:{1:00}", minutos, segundos);
+    }
+
+    private IEnumerator Enviar(RegistroJugador registroJugador)
+    {
+        string json = JsonUtility.ToJson(registroJugador);
+        Debug.Log(json);
+
+        WWWForm form = new WWWForm();
+        form.AddField("data", json);  // <-- enviamos el JSON como campo de formulario
+
+        UnityWebRequest request = UnityWebRequest.Post(urlHojaCalculo, form);
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+            Debug.Log("Datos enviados: " + request.downloadHandler.text);
+        else
+            Debug.LogError(request.error);
     }
 }
