@@ -11,6 +11,7 @@ public struct DatosItem
 [System.Serializable]
 public struct RegistroJugador
 {
+    public string sesionId;
     public string nombreJugador;
     public int edadJugador;
     public bool tutorialCompletado;

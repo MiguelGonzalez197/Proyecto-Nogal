@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,6 +12,9 @@ public class GestorDatos : MonoBehaviour
     [SerializeField]
     private RegistroJugador registroJugador;
 
+    [SerializeField]
+    private List<IInteractuable> listaInteractuables = new List<IInteractuable>();
+
     private float tiempoOcurrido;
     string urlHojaCalculo = "https://script.google.com/macros/s/AKfycbwuNA_g_0YpFvUqm4WJgcH56Ff644ypVCS3gY3CzosRakPIXpPLeonX1L7VxAzIe5Bc4Q/exec";
 
@@ -18,43 +23,31 @@ public class GestorDatos : MonoBehaviour
         if (instancia == null)
         {
             instancia = this;
-            DontDestroyOnLoad(gameObject); // Mantiene el objeto al cambiar de escena
-            //RecyclingLogger.Log($"Session started for {playerName}");
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Evita duplicados
+            Destroy(gameObject);
         }
 
         registroJugador.tutorialCompletado = false;
-    }
 
-    void Start()
-    {
-        RegistrarDatosJugador("Test", 10);
-        RegistrarExitoTutorial(true);
-        StartCoroutine(Enviar(registroJugador));
+        registroJugador.sesionId = System.Guid.NewGuid().ToString();
     }
 
     void Update()
     {
         RegistrarTiempo();
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            Debug.Log("Boton presionado para guardar");
-            GuardarDatos();
-        }
     }
 
     void OnApplicationPause(bool pause)
     {
-        //if (pause) GuardarDatos();
+        if (pause) GuardarDatos();
     }
 
     void OnApplicationQuit()
     {
-        //GuardarDatos();
+        GuardarDatos();
 
     }
 
@@ -71,9 +64,15 @@ public class GestorDatos : MonoBehaviour
         registroJugador.dineroRecolectado = inventario.ObtenerDinero();
     }
 
+
     public void RegistrarExitoTutorial(bool bTutorialCompletado)
     {
         registroJugador.tutorialCompletado = bTutorialCompletado;
+    }
+
+    public void RegistrarInteractuableGuardado(IInteractuable interactuable)
+    {
+        interactuable.EnTerminarInteraccion += GuardarDatos;
     }
 
     public bool CompletoTutorial()
@@ -84,7 +83,6 @@ public class GestorDatos : MonoBehaviour
     private void GuardarDatos()
     {
         StartCoroutine(Enviar(registroJugador));
-        //RegistradorReciclaje.RegistrarDatos(registroJugador); ;
     }
 
     private void RegistrarTiempo()
@@ -112,4 +110,5 @@ public class GestorDatos : MonoBehaviour
         else
             Debug.LogError(request.error);
     }
+
 }

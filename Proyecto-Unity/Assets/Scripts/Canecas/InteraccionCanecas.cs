@@ -3,9 +3,18 @@
 public class InteraccionCanecas : MonoBehaviour , IInteractuable
 {
     // ───────────────────────────────────────
+    // 1. REFERENCIAS PUBLICAS
+    // ───────────────────────────────────────
+
+    /** <Eventos> */
+    public event System.Action EnTerminarInteraccion;
+    /** <\Eventos> */
+
+    // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
     // ───────────────────────────────────────
     private ModuloSeparacion moduloSeparacion;                          // Referencia al modulo donde se encuentra la caneca
+
 
     // ───────────────────────────────────────
     // 3. MÉTODOS UNITY

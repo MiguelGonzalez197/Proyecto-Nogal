@@ -22,7 +22,11 @@ public class Modulo : MonoBehaviour , IInteractuable
     [Header("Valores")]
     [Range(0, 2)]
     [SerializeField]
-    protected float duracionMovimientoCamara = 0.5f;                      
+    protected float duracionMovimientoCamara = 0.5f;
+
+    /** <Eventos> */
+    public event System.Action EnTerminarInteraccion;
+    /** <\Eventos> */
 
     // ───────────────────────────────────────
     // 2. CAMPOS PRIVADOS INTERNOS
@@ -38,7 +42,7 @@ public class Modulo : MonoBehaviour , IInteractuable
     {
         
         boxCollider = GetComponent<BoxCollider>();
-        
+        GestorDatos.instancia.RegistrarInteractuableGuardado(this);
     }
 
     // ───────────────────────────────────────
@@ -110,6 +114,11 @@ public class Modulo : MonoBehaviour , IInteractuable
         gameManager.DesbloquearCamara();
         ActivarCanva(false);
         ActivarCollider(true);
+
+        if(EnTerminarInteraccion != null)
+        {
+            EnTerminarInteraccion();
+        }
         
     }
 }
