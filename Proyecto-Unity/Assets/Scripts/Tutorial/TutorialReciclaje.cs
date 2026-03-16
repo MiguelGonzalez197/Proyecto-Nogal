@@ -88,8 +88,8 @@ public class TutorialReciclaje : MonoBehaviour
 
     private IEnumerator MostrarTutorial()
     {
-        GestorCajaTexto.Instancia.MostrarMensaje(
-            "Bienvenido a Ecomisión",
+        /*GestorCajaTexto.Instancia.MostrarMensaje(
+            "Bienvenido a Ecomisiï¿½n",
             10);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -103,28 +103,29 @@ public class TutorialReciclaje : MonoBehaviour
         indice++;
         yield return new WaitForSeconds(9);
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Separar correctamente los residuos desde casa permite que los materiales aprovechables lleguen limpios a los centros de reciclaje y disminuye la contaminación en nuestro entorno.",
+            "Separar correctamente los residuos desde casa permite que los materiales aprovechables lleguen limpios a los centros de reciclaje y disminuye la contaminaciï¿½n en nuestro entorno.",
             9);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
         indice++;
         yield return new WaitForSeconds(9);
+        */
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "La caneca verde representa los residuos orgánicos biodegradables, como restos de comida y cáscaras, que pueden convertirse en abono natural mediante compostaje.",
+            "La caneca verde representa los residuos orgï¿½nicos biodegradables, como restos de comida y cï¿½scaras, que pueden convertirse en abono natural mediante compostaje.",
            10);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
         indice++;
         yield return new WaitForSeconds(10);
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "La caneca blanca se usa para los materiales aprovechables no orgánicos como papeles limpios, plásticos, metales o vidrios que pueden reciclarse o reutilizarse.",
+            "La caneca blanca se usa para los materiales aprovechables no orgï¿½nicos como papeles limpios, plï¿½sticos, metales o vidrios que pueden reciclarse o reutilizarse.",
             10);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
         indice++;
         yield return new WaitForSeconds(10);
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "La caneca negra se reserva para los residuos no aprovechables, aquellos que están contaminados, sucios o deteriorados y que terminarán en un relleno sanitario.",
+            "La caneca negra se reserva para los residuos no aprovechables, aquellos que estï¿½n contaminados, sucios o deteriorados y que terminarï¿½n en un relleno sanitario.",
             10);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -136,7 +137,7 @@ public class TutorialReciclaje : MonoBehaviour
             moduloSeparacion.Interactuar();
         }
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Este es el módulo de separación, aquí obtienes bolsas y decides qué hacer con su contenido.",
+            "Este es el mï¿½dulo de separaciï¿½n, aquï¿½ obtienes bolsas y decides quï¿½ hacer con su contenido.",
             4);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -154,7 +155,7 @@ public class TutorialReciclaje : MonoBehaviour
         indice++;
         yield return new WaitForSeconds(10);
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Si una bolsa ya trae todos los residuos separados, puedes usar el botón 'Botar bolsa'.",
+            "Si una bolsa ya trae todos los residuos separados, puedes usar el botï¿½n 'Botar bolsa'.",
             11);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -178,7 +179,7 @@ public class TutorialReciclaje : MonoBehaviour
             moduloCompra.Interactuar();
         }
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Este es el módulo de compra. Aquí puedes adquirir más mesas, estilos de ropa que llegarán próximamente y accesorios para tu bodega.",
+            "Este es el mï¿½dulo de compra. Aquï¿½ puedes adquirir mï¿½s mesas, estilos de ropa que llegarï¿½n prï¿½ximamente y accesorios para tu bodega.",
             11);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -195,7 +196,7 @@ public class TutorialReciclaje : MonoBehaviour
         yield return new WaitForSeconds(17);
 
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "Compra la mesa de crafteo en el menú Modulos para continuar.",
+            "Compra la mesa de crafteo en el menï¿½ Modulos para continuar.",
             6);
         audioSrc.clip = clips[indice];
         audioSrc.Play();
@@ -230,7 +231,7 @@ public class TutorialReciclaje : MonoBehaviour
             moduloCrafteo.Interactuar();
         }
         GestorCajaTexto.Instancia.MostrarMensaje(
-            "En el módulo de crafteo, próximamente podrás crear objetos con los residuos reutilizables que clasificaste, aunque por ahora esta mecánica está en desarrollo.",
+            "En el mï¿½dulo de crafteo, prï¿½ximamente podrï¿½s crear objetos con los residuos reutilizables que clasificaste, aunque por ahora esta mecï¿½nica estï¿½ en desarrollo.",
             7);
         yield return new WaitForSeconds(7);
 
@@ -290,28 +291,28 @@ public class TutorialReciclaje : MonoBehaviour
         {
             case ETipoReciclaje.OrganicoAprovechable:
                 if (datos.tipoItem == ETipoItem.Bolsa)
-                    mensaje = "Esta bolsa verde ya trae residuos orgánicos separados, bótala completa en la caneca verde sin abrirla.";
+                    mensaje = "Esta bolsa verde ya trae residuos orgï¿½nicos separados, bï¿½tala completa en la caneca verde sin abrirla.";
                 else
-                    mensaje = nombre + " es un residuo orgánico que se descompone y puede convertirse en abono, por eso debe ir en la caneca verde.";
+                    mensaje = nombre + " es un residuo orgï¿½nico que se descompone y puede convertirse en abono, por eso debe ir en la caneca verde.";
                 ActivarSoloInteraccion(interaccionVerde);
                 break;
             case ETipoReciclaje.Aprovechable:
                 if (datos.tipoItem == ETipoItem.Bolsa)
-                    mensaje = "Esta bolsa blanca contiene materiales reciclables limpios; deposítala entera en la caneca blanca.";
+                    mensaje = "Esta bolsa blanca contiene materiales reciclables limpios; deposï¿½tala entera en la caneca blanca.";
                 else
-                    mensaje = nombre + " está limpio y en buen estado, puede reciclarse o reutilizarse; deposítalo en la caneca blanca.";
+                    mensaje = nombre + " estï¿½ limpio y en buen estado, puede reciclarse o reutilizarse; deposï¿½talo en la caneca blanca.";
                 ActivarSoloInteraccion(interaccionBlanca);
                 break;
             case ETipoReciclaje.NoAprovechable:
                 if (datos.tipoItem == ETipoItem.Bolsa)
                 {
-                    mensaje = "Esta bolsa contiene materiales de Todo tipo, no ha sido clasificada, debió abrirse y clasificarse; puede depositarse en cualquier caneca aunque algunos items no pertenezcan a ella.";
+                    mensaje = "Esta bolsa contiene materiales de Todo tipo, no ha sido clasificada, debiï¿½ abrirse y clasificarse; puede depositarse en cualquier caneca aunque algunos items no pertenezcan a ella.";
                     SetInteracciones(true, true, true);
                 }
 
                 else
                 {
-                    mensaje = nombre + " está sucio, contaminado u oxidado y no se recicla; bótalo en la caneca negra.";
+                    mensaje = nombre + " estï¿½ sucio, contaminado u oxidado y no se recicla; bï¿½talo en la caneca negra.";
                     ActivarSoloInteraccion(interaccionNegra);
                 }
                     
