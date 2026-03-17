@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -13,12 +11,14 @@ public class GestorDatos : MonoBehaviour
     private RegistroJugador registroJugador;
 
     [SerializeField]
-    private List<IInteractuable> listaInteractuables = new List<IInteractuable>();
+    private string urlHojaCalculo = "https://script.google.com/macros/s/AKfycbwuNA_g_0YpFvUqm4WJgcH56Ff644ypVCS3gY3CzosRakPIXpPLeonX1L7VxAzIe5Bc4Q/exec";
 
-    private float tiempoOcurrido;
-    string urlHojaCalculo = "https://script.google.com/macros/s/AKfycbwuNA_g_0YpFvUqm4WJgcH56Ff644ypVCS3gY3CzosRakPIXpPLeonX1L7VxAzIe5Bc4Q/exec";
+    private readonly HashSet<IInteractuable> interactuablesRegistrados = new HashSet<IInteractuable>();
+    private Coroutine rutinaEnvio;
+    private bool hayEnvioPendiente;
+    private float tiempoInicioSesion;
 
-    void Awake()
+    private void Awake()
     {
         if (instancia == null)
         {
@@ -28,27 +28,25 @@ public class GestorDatos : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         registroJugador.tutorialCompletado = false;
-
         registroJugador.sesionId = System.Guid.NewGuid().ToString();
+        tiempoInicioSesion = Time.realtimeSinceStartup;
     }
 
-    void Update()
+    private void OnApplicationPause(bool pause)
     {
-        RegistrarTiempo();
+        if (pause)
+        {
+            GuardarDatos();
+        }
     }
 
-    void OnApplicationPause(bool pause)
-    {
-        if (pause) GuardarDatos();
-    }
-
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         GuardarDatos();
-
     }
 
     public void RegistrarDatosJugador(string nombre, int edad)
@@ -64,14 +62,16 @@ public class GestorDatos : MonoBehaviour
         registroJugador.dineroRecolectado = inventario.ObtenerDinero();
     }
 
-
-    public void RegistrarExitoTutorial(bool bTutorialCompletado)
+    public void RegistrarExitoTutorial(bool tutorialCompletado)
     {
-        registroJugador.tutorialCompletado = bTutorialCompletado;
+        registroJugador.tutorialCompletado = tutorialCompletado;
     }
 
     public void RegistrarInteractuableGuardado(IInteractuable interactuable)
     {
+        if (interactuable == null || interactuablesRegistrados.Contains(interactuable)) return;
+
+        interactuablesRegistrados.Add(interactuable);
         interactuable.EnTerminarInteraccion += GuardarDatos;
     }
 
@@ -82,33 +82,52 @@ public class GestorDatos : MonoBehaviour
 
     private void GuardarDatos()
     {
-        StartCoroutine(Enviar(registroJugador));
+        ActualizarTiempoSesion();
+
+        if (rutinaEnvio != null)
+        {
+            hayEnvioPendiente = true;
+            return;
+        }
+
+        rutinaEnvio = StartCoroutine(Enviar(registroJugador));
     }
 
-    private void RegistrarTiempo()
+    private void ActualizarTiempoSesion()
     {
-        tiempoOcurrido += Time.deltaTime;
-        int minutos = Mathf.FloorToInt(tiempoOcurrido / 60);
-        int segundos = Mathf.FloorToInt(tiempoOcurrido % 60);
+        float tiempoOcurrido = Time.realtimeSinceStartup - tiempoInicioSesion;
+        int minutos = Mathf.FloorToInt(tiempoOcurrido / 60f);
+        int segundos = Mathf.FloorToInt(tiempoOcurrido % 60f);
         registroJugador.tiempoSesion = string.Format("{0:00}:{1:00}", minutos, segundos);
     }
 
-    private IEnumerator Enviar(RegistroJugador registroJugador)
+    private IEnumerator Enviar(RegistroJugador datosSesion)
     {
-        string json = JsonUtility.ToJson(registroJugador);
-        Debug.Log(json);
+        string json = JsonUtility.ToJson(datosSesion);
 
         WWWForm form = new WWWForm();
-        form.AddField("data", json);  // <-- enviamos el JSON como campo de formulario
+        form.AddField("data", json);
 
-        UnityWebRequest request = UnityWebRequest.Post(urlHojaCalculo, form);
+        using (UnityWebRequest request = UnityWebRequest.Post(urlHojaCalculo, form))
+        {
+            yield return request.SendWebRequest();
 
-        yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Datos enviados: " + request.downloadHandler.text);
+            }
+            else
+            {
+                Debug.LogError(request.error);
+            }
+        }
 
-        if (request.result == UnityWebRequest.Result.Success)
-            Debug.Log("Datos enviados: " + request.downloadHandler.text);
-        else
-            Debug.LogError(request.error);
+        rutinaEnvio = null;
+
+        if (hayEnvioPendiente)
+        {
+            hayEnvioPendiente = false;
+            GuardarDatos();
+        }
     }
-
 }

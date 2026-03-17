@@ -5,19 +5,17 @@ public class GestorCajaTexto : MonoBehaviour
     public static GestorCajaTexto Instancia { get; private set; }
 
     [Header("Prefab y Padre")]
-    [SerializeField]
-    private GameObject prefabCajaTexto;    // prefab con CajaTextoReutilizable
-    [SerializeField]
-    private Transform contenedorCanvas;
+    [SerializeField] private GameObject prefabCajaTexto;
+    [SerializeField] private Transform contenedorCanvas;
 
     [Header("Prefab mensajes de clasificacion")]
-    [SerializeField]
-    private GameObject prefabCajaClasificacion;   // prefab anclado a la derecha
-    [SerializeField]
-    private Transform contenedorClasificacion;    // contenedor lateral
-    private GameObject mensajeActual;
+    [SerializeField] private GameObject prefabCajaClasificacion;
+    [SerializeField] private Transform contenedorClasificacion;
 
-    void Awake()
+    private CajaTextoReutilizable mensajeActual;
+    private CajaTextoReutilizable mensajeClasificacionActual;
+
+    private void Awake()
     {
         if (Instancia != null && Instancia != this)
         {
@@ -29,48 +27,28 @@ public class GestorCajaTexto : MonoBehaviour
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
     }
-   
-    
 
-
-   
     public void MostrarMensaje(string mensaje, float? duracion = null, bool cerrarPrevio = false)
     {
-        if (cerrarPrevio && mensajeActual != null)
+        CajaTextoReutilizable caja = ObtenerOCrearCaja(ref mensajeActual, prefabCajaTexto, contenedorCanvas);
+        if (caja == null) return;
+
+        if (cerrarPrevio)
         {
-            Destroy(mensajeActual);
-            mensajeActual = null;
+            caja.Ocultar();
         }
 
-        mensajeActual = Instantiate(prefabCajaTexto, contenedorCanvas, worldPositionStays: false);
-        CajaTextoReutilizable caja = mensajeActual.GetComponent<CajaTextoReutilizable>();
-        if (duracion.HasValue)
-        {
-            caja.tiempoCierreAutomatico = duracion.Value;
-            caja.Mostrar(mensaje);
-        }
+        ConfigurarDuracion(caja, duracion);
+        caja.Mostrar(mensaje);
     }
-        
-        
-    
-    /// <summary>
-    /// Oculta el mensaje actualmente visible si existe.
-    /// </summary>
-  public void OcultarMensajeActual()
+
+    public void OcultarMensajeActual()
     {
-    if (mensajeActual == null) return;
-
-    CajaTextoReutilizable caja = mensajeActual.GetComponent<CajaTextoReutilizable>();
-    if (caja != null)
-        caja.Ocultar();
-
-    Destroy(mensajeActual);
-    mensajeActual = null;
+        if (mensajeActual == null) return;
+        mensajeActual.Ocultar();
     }
-/// <summary>
-/// Mensajes que aparecen en el costado derecho al clasificar items.
-/// </summary>
-public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
+
+    public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
     {
         if (prefabCajaClasificacion == null || contenedorClasificacion == null)
         {
@@ -78,11 +56,36 @@ public void MostrarMensajeClasificacion(string mensaje, float? duracion = null)
             return;
         }
 
-        GameObject go = Instantiate(prefabCajaClasificacion, contenedorClasificacion, false);
-        CajaTextoReutilizable caja = go.GetComponent<CajaTextoReutilizable>();
-        if (duracion.HasValue)
-            caja.tiempoCierreAutomatico = duracion.Value;
+        CajaTextoReutilizable caja = ObtenerOCrearCaja(ref mensajeClasificacionActual, prefabCajaClasificacion, contenedorClasificacion);
+        if (caja == null) return;
+
+        ConfigurarDuracion(caja, duracion);
         caja.Mostrar(mensaje);
     }
-}
 
+    private CajaTextoReutilizable ObtenerOCrearCaja(ref CajaTextoReutilizable cajaActual, GameObject prefab, Transform contenedor)
+    {
+        if (cajaActual != null) return cajaActual;
+        if (prefab == null || contenedor == null) return null;
+
+        GameObject instancia = Instantiate(prefab, contenedor, false);
+        cajaActual = instancia.GetComponent<CajaTextoReutilizable>();
+        if (cajaActual != null)
+        {
+            cajaActual.destruirAlOcultar = false;
+        }
+
+        return cajaActual;
+    }
+
+    private void ConfigurarDuracion(CajaTextoReutilizable caja, float? duracion)
+    {
+        if (duracion.HasValue)
+        {
+            caja.tiempoCierreAutomatico = duracion.Value;
+            return;
+        }
+
+        caja.RestablecerDuracionPredeterminada();
+    }
+}

@@ -1,55 +1,63 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteraccionTactil : MonoBehaviour
 {
-    // ───────────────────────────────────────
-    // 1. REFERENCIAS SERIALIZADAS
-    // ───────────────────────────────────────
     [Header("Valores")]
-    [SerializeField]
-    float maxDistanciaTap = 10f;  // En píxeles cual es la cantidad maxima para mover la pantalla y contar como tap
-    [SerializeField]
-    float maxDuracionTap = 0.3f;  // En segundos cual es el maximo que debe durar la interacion con la pantallar para contar como tap
+    [SerializeField] private float maxDistanciaTap = 10f;
+    [SerializeField] private float maxDuracionTap = 0.3f;
+    [SerializeField] private Camera camaraRaycast;
 
-    // ───────────────────────────────────────
-    // 2. CAMPOS PRIVADOS INTERNOS
-    // ───────────────────────────────────────
     private Vector2 posicionInicioToque;
     private float tiempoInicioToque;
 
-    // ───────────────────────────────────────
-    // 3. MÉTODOS UNITY
-    // ───────────────────────────────────────
-    void Update()
+    private void Awake()
     {
-        InteraccionTactilMovil();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        CachearCamara();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Update()
+    {
+        if (Input.touchSupported && Input.touchCount > 0)
+        {
+            InteraccionTactilMovil();
+            return;
+        }
+
         InteraccionTactilPC();
     }
 
-    // ───────────────────────────────────────
-    // 4. MÉTODOS PRIVADOS
-    // ───────────────────────────────────────
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CachearCamara();
+    }
+
     private void InteraccionTactilMovil()
     {
-        if (Input.touchCount == 1)
+        if (Input.touchCount != 1) return;
+
+        Touch toque = Input.GetTouch(0);
+
+        if (toque.phase == TouchPhase.Began)
         {
-            Touch toque = Input.GetTouch(0);
+            posicionInicioToque = toque.position;
+            tiempoInicioToque = Time.time;
+        }
 
-            if (toque.phase == TouchPhase.Began)
+        if (toque.phase == TouchPhase.Ended)
+        {
+            float duracion = Time.time - tiempoInicioToque;
+            float distancia = Vector2.Distance(toque.position, posicionInicioToque);
+
+            if (PuedeRealizarInteraccion(duracion, distancia))
             {
-                posicionInicioToque = toque.position;
-                tiempoInicioToque = Time.time;
-            }
-
-            if (toque.phase == TouchPhase.Ended)
-            {
-                float duracion = Time.time - tiempoInicioToque;
-                float distancia = Vector2.Distance(toque.position, posicionInicioToque);
-
-                if (PuedeRealizarInteraccion(duracion, distancia))
-                {
-                    ProcesarRaycast(toque.position);
-                }
+                ProcesarRaycast(toque.position);
             }
         }
     }
@@ -76,7 +84,13 @@ public class InteraccionTactil : MonoBehaviour
 
     private void ProcesarRaycast(Vector2 posicionPantalla)
     {
-        Ray rayo = Camera.main.ScreenPointToRay(posicionPantalla);
+        if (camaraRaycast == null)
+        {
+            CachearCamara();
+            if (camaraRaycast == null) return;
+        }
+
+        Ray rayo = camaraRaycast.ScreenPointToRay(posicionPantalla);
 
         if (Physics.Raycast(rayo, out RaycastHit impacto))
         {
@@ -91,5 +105,13 @@ public class InteraccionTactil : MonoBehaviour
     private bool PuedeRealizarInteraccion(float duracion, float distancia)
     {
         return duracion < maxDuracionTap && distancia < maxDistanciaTap;
+    }
+
+    private void CachearCamara()
+    {
+        if (camaraRaycast == null)
+        {
+            camaraRaycast = Camera.main;
+        }
     }
 }

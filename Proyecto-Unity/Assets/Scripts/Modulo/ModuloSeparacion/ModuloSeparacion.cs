@@ -37,8 +37,9 @@ public class ModuloSeparacion : Modulo
     private GameObject itemActual;                                                  // Referencia al item con el que se esta tratando
     private IItem interfaceItemActual;                                              // Interface del item actual
     private int bolsasHechas = 0;                                                   // Contador de cada bolsa realizada
+    private int numeroBolsasObjetivoActual;
     private bool bEstaLaCamaraALaIzquierda = true;                                  // Booleano que permite saber si la camara esta en la posicion 1 o la posicion 2
-    public bool HaClasificadoTodasLasBolsas => bolsasHechas >= numeroBolsasDisponibles;
+    public bool HaClasificadoTodasLasBolsas => bolsasHechas >= numeroBolsasObjetivoActual;
 
     // ───────────────────────────────────────
     // 3. MÉTODOS UNITY
@@ -47,6 +48,7 @@ public class ModuloSeparacion : Modulo
     protected override void Start()
     {
         base.Start();
+        numeroBolsasObjetivoActual = numeroBolsasDisponibles;
         InicializarUbicacionesContenido();
     }
 
@@ -56,11 +58,18 @@ public class ModuloSeparacion : Modulo
 
     public override void Interactuar()
     {
-        
         base.Interactuar();
+        ResetearEstadoModulo();
+        numeroBolsasObjetivoActual = numeroBolsasDisponibles;
         bolsasHechas = 0;
+        bEstaLaCamaraALaIzquierda = true;
         ActivarBotonesMesa(true);
         SpawnearBolsa();
+    }
+
+    public void ConfigurarNumeroBolsasParaSesion(int cantidad)
+    {
+        numeroBolsasObjetivoActual = Mathf.Clamp(cantidad, 1, numeroBolsasDisponibles);
     }
 
     /// <summary>
@@ -69,7 +78,7 @@ public class ModuloSeparacion : Modulo
     /// </summary>
     public void SpawnearBolsa()
     {
-        if (bolsasHechas != numeroBolsasDisponibles)
+        if (bolsasHechas != numeroBolsasObjetivoActual)
         {
             int random = Random.Range(0, 100); // De 0 a 99
 
@@ -181,7 +190,7 @@ public class ModuloSeparacion : Modulo
 
     private void SpawnearContenidoBolsa()
     {
-        int cantidad = spawnsContenido.Count;
+        int cantidad = Mathf.Min(spawnsContenido.Count, prefabsResiduosBolsa.Count);
         for (int i = 0; i < cantidad; i++)
         {
             GameObject instancia = Instantiate(prefabsResiduosBolsa[i], spawnsContenido[i], Quaternion.identity);
@@ -233,6 +242,12 @@ public class ModuloSeparacion : Modulo
 
     private void ObtenerInterfaceItem(GameObject instancia)
     {
+        if (instancia == null)
+        {
+            interfaceItemActual = null;
+            return;
+        }
+
         interfaceItemActual = instancia.GetComponent<IItem>();
     }
 
@@ -261,6 +276,7 @@ public class ModuloSeparacion : Modulo
     {
         yield return new WaitForSeconds(1f);
         Destroy(bolsaActual.gameObject);
+        bolsaActual = null;
         SpawnearContenidoBolsa();
         ActivarBotonMoverCamara(true);
         ActivarBotonesMesa(false);
@@ -269,5 +285,14 @@ public class ModuloSeparacion : Modulo
     private bool EsBolsaNegra(DatosItem datosItem)
     {
         return datosItem.tipoReciclaje == ETipoReciclaje.NoAprovechable;
+    }
+
+    private void ResetearEstadoModulo()
+    {
+        prefabsResiduosBolsa.Clear();
+        referenciasResiduosBolsa.Clear();
+        itemActual = null;
+        interfaceItemActual = null;
+        bolsaActual = null;
     }
 }

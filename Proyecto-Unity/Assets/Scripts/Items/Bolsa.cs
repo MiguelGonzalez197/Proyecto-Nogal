@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Bolsa : Item
 {
+    private readonly List<GameObject> prefabsMixtos = new List<GameObject>();
+    private bool prefabsMixtosInicializados;
 
     [Header("Contenido")]
     [SerializeField]
@@ -19,9 +21,12 @@ public class Bolsa : Item
 
     protected override void Start()
     {
-        base.Start();
-        rigidbodyItem.useGravity = false;
         bPuedeRotar = false;
+        base.Start();
+        if (rigidbodyItem != null)
+        {
+            rigidbodyItem.useGravity = false;
+        }
         CrearContenido();
     }
 
@@ -74,11 +79,18 @@ public class Bolsa : Item
 
     private GameObject EscogerResiduoAleatorioDeCualquierLista()
     {
-        List<GameObject> todosLosPrefabs = new List<GameObject>();
-        todosLosPrefabs.AddRange(prefabsAprovechables);
-        todosLosPrefabs.AddRange(prefabsNoAprovechables);
-        todosLosPrefabs.AddRange(prefabsOrganicosAprovechables);
+        InicializarPrefabsMixtos();
+        return EscogerDeLista(prefabsMixtos);
+    }
 
-        return EscogerDeLista(todosLosPrefabs);
+    private void InicializarPrefabsMixtos()
+    {
+        if (prefabsMixtosInicializados) return;
+
+        prefabsMixtos.Clear();
+        prefabsMixtos.AddRange(prefabsAprovechables);
+        prefabsMixtos.AddRange(prefabsNoAprovechables);
+        prefabsMixtos.AddRange(prefabsOrganicosAprovechables);
+        prefabsMixtosInicializados = true;
     }
 }

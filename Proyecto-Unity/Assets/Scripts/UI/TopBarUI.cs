@@ -1,10 +1,14 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TopBarUI : MonoBehaviour
 {
     public static TopBarUI Instancia { get; private set; }
+
+    private const string PrefNombreJugador = "NombreJugador";
+    private const string PrefEdadJugador = "EdadJugador";
 
     private Inventario inventario;
 
@@ -26,39 +30,84 @@ public class TopBarUI : MonoBehaviour
         transform.SetParent(null);
         DontDestroyOnLoad(gameObject);
 
-        inventario = FindObjectOfType<Inventario>();
-
-
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        ResolverInventario();
         ActualizarNombre();
+        ActualizarInventarioUI();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (inventario == null)
-            inventario = FindObjectOfType<Inventario>();
+        if (Instancia != this) return;
 
-        if (inventario != null)
-        {
-            if (dineroText != null)
-                dineroText.text = $"$ {inventario.ObtenerDinero()}";
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        DesvincularInventario();
+        Instancia = null;
+    }
 
-            if (aciertosText != null)
-                aciertosText.text = $"Aciertos: {inventario.ObtenerAciertos()}";
-
-            if (desaciertosText != null)
-                desaciertosText.text = $"Desaciertos: {inventario.ObtenerDesaciertos()}";
-        }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResolverInventario();
+        ActualizarNombre();
     }
 
     public void ActualizarNombre()
     {
+        string nombreJugador = PlayerPrefs.GetString(PrefNombreJugador, "Jugador");
+
         if (nombreText != null)
-            nombreText.text = $"Nombre: {PlayerPrefs.GetString("NombreJugador", "Jugador")}";
+        {
+            nombreText.text = "Nombre: " + nombreJugador;
+        }
+
+        if (GestorDatos.instancia != null)
+        {
             GestorDatos.instancia.RegistrarDatosJugador(
-                PlayerPrefs.GetString("NombreJugador", "Jugador"), 
-                PlayerPrefs.GetInt("EdadJugador", 0)
-                );
+                nombreJugador,
+                PlayerPrefs.GetInt(PrefEdadJugador, 0)
+            );
+        }
     }
 
-    
+    private void ResolverInventario()
+    {
+        Inventario nuevoInventario = FindObjectOfType<Inventario>();
+        if (nuevoInventario == inventario) return;
+
+        DesvincularInventario();
+        inventario = nuevoInventario;
+
+        if (inventario != null)
+        {
+            inventario.EnInventarioActualizado += ActualizarInventarioUI;
+        }
+
+        ActualizarInventarioUI();
+    }
+
+    private void DesvincularInventario()
+    {
+        if (inventario == null) return;
+
+        inventario.EnInventarioActualizado -= ActualizarInventarioUI;
+        inventario = null;
+    }
+
+    private void ActualizarInventarioUI()
+    {
+        if (dineroText != null)
+        {
+            dineroText.text = inventario != null ? "$ " + inventario.ObtenerDinero() : "$ 0";
+        }
+
+        if (aciertosText != null)
+        {
+            aciertosText.text = inventario != null ? "Aciertos: " + inventario.ObtenerAciertos() : "Aciertos: 0";
+        }
+
+        if (desaciertosText != null)
+        {
+            desaciertosText.text = inventario != null ? "Desaciertos: " + inventario.ObtenerDesaciertos() : "Desaciertos: 0";
+        }
+    }
 }

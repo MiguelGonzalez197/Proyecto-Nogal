@@ -40,9 +40,11 @@ public class Modulo : MonoBehaviour , IInteractuable
 
     protected virtual void Start()
     {
-        
         boxCollider = GetComponent<BoxCollider>();
-        GestorDatos.instancia.RegistrarInteractuableGuardado(this);
+        if (GestorDatos.instancia != null)
+        {
+            GestorDatos.instancia.RegistrarInteractuableGuardado(this);
+        }
     }
 
     // ───────────────────────────────────────
@@ -71,12 +73,6 @@ public class Modulo : MonoBehaviour , IInteractuable
     public virtual void SalirModuloCallback()
     {
         StartCoroutine(SalirModulo(0));
-        /*
-        gameManager.RestaurarCamara();
-        gameManager.RegistrarModuloActivo(null);
-        gameManager.DesbloquearCamara();
-        ActivarCanva(false);
-        ActivarCollider(true);*/
     }
 
     // ───────────────────────────────────────
@@ -109,13 +105,16 @@ public class Modulo : MonoBehaviour , IInteractuable
     protected IEnumerator SalirModulo(float espera)
     {
         yield return new WaitForSeconds(espera);
-        gameManager.RestaurarCamara();
-        gameManager.RegistrarModuloActivo(null);
-        gameManager.DesbloquearCamara();
+        if (gameManager != null)
+        {
+            gameManager.RestaurarCamara();
+            gameManager.RegistrarModuloActivo(null);
+            gameManager.DesbloquearCamara();
+        }
         ActivarCanva(false);
         ActivarCollider(true);
 
-        if(EnTerminarInteraccion != null)
+        if (EnTerminarInteraccion != null)
         {
             EnTerminarInteraccion();
         }

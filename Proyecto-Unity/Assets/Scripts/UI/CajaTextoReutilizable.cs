@@ -1,38 +1,70 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class CajaTextoReutilizable : MonoBehaviour
 {
     [Header("Referencias UI")]
-    public TextMeshProUGUI mensajeTMP;     // asignar en el inspector
+    public TextMeshProUGUI mensajeTMP;
 
-    [Header("Configuración")]
-    public float tiempoCierreAutomatico = 3f;  // 0 = manual
+    [Header("ConfiguraciÃ³n")]
+    public float tiempoCierreAutomatico = 3f;
+
+    [HideInInspector] public bool destruirAlOcultar = true;
 
     private CanvasGroup canvasGroup;
     private Coroutine rutinaOcultar;
+    private float tiempoCierrePredeterminado;
 
-    void Awake()
+    private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null)
+        {
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
 
+        tiempoCierrePredeterminado = tiempoCierreAutomatico;
         OcultarInstantaneo();
     }
 
-    
     public void Mostrar(string mensaje)
     {
+        if (mensajeTMP == null) return;
+
         mensajeTMP.text = mensaje;
         MostrarInstantaneo();
 
         if (rutinaOcultar != null)
+        {
             StopCoroutine(rutinaOcultar);
+        }
 
-        if (tiempoCierreAutomatico > 0)
+        if (tiempoCierreAutomatico > 0f)
+        {
             rutinaOcultar = StartCoroutine(OcultarAutomatico());
+        }
+    }
+
+    public void Ocultar()
+    {
+        if (rutinaOcultar != null)
+        {
+            StopCoroutine(rutinaOcultar);
+            rutinaOcultar = null;
+        }
+
+        OcultarInstantaneo();
+
+        if (destruirAlOcultar)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void RestablecerDuracionPredeterminada()
+    {
+        tiempoCierreAutomatico = tiempoCierrePredeterminado;
     }
 
     private IEnumerator OcultarAutomatico()
@@ -41,27 +73,16 @@ public class CajaTextoReutilizable : MonoBehaviour
         Ocultar();
     }
 
-    /// <summary>
-    /// Oculta el recuadro.
-    /// </summary>
-    public void Ocultar()
-    {
-        if (rutinaOcultar != null)
-            StopCoroutine(rutinaOcultar);
-        OcultarInstantaneo();
-        Destroy(gameObject);
-    }
-
     private void MostrarInstantaneo()
     {
-        canvasGroup.alpha = 1;
+        canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
 
     private void OcultarInstantaneo()
     {
-        canvasGroup.alpha = 0;
+        canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
